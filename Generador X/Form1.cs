@@ -16,6 +16,5 @@ namespace Generador_X
         {
             InitializeComponent();
         }
-
     }
 }
