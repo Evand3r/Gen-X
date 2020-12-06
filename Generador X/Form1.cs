@@ -7,28 +7,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Generador_X.Controls;
 
 namespace Generador_X
 {
-    public partial class Form1 : Form
+    public partial class MainView : Form
     {
-        Control focus = null;
+        /// <summary>
+        /// Campo seleccionado actuallmente.
+        /// </summary>
+        Control FocusedControl = null;
+        Random rand = new Random();
+        /// <summary>
+        /// Tamaño de los campos
+        /// </summary>
+        int WidthOffSet = 20;
 
-        public Form1()
+        public MainView()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             try
             {
-                if (focus != null)
+                if (FocusedControl != null)
                 {
-                    flowLayoutPanel2.Controls.SetChildIndex(
-                        focus,
-                        flowLayoutPanel2.Controls.GetChildIndex(focus) - 1
-                        );
+                    StackedPanel.Controls.SetChildIndex(
+                        FocusedControl,
+                        StackedPanel.Controls.GetChildIndex(FocusedControl) - 1);
+                    StackedPanel.ScrollControlIntoView(FocusedControl);
                 }
             }
             catch (Exception ex)
@@ -37,16 +46,17 @@ namespace Generador_X
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             try
             {
-                if (focus != null)
+                if (FocusedControl != null)
                 {
-                    flowLayoutPanel2.Controls.SetChildIndex(
-                        focus,
-                        flowLayoutPanel2.Controls.GetChildIndex(focus) + 1
+                    StackedPanel.Controls.SetChildIndex(
+                        FocusedControl,
+                        StackedPanel.Controls.GetChildIndex(FocusedControl) + 1
                         );
+                    StackedPanel.ScrollControlIntoView(FocusedControl);
                 }
             }
             catch (Exception ex)
@@ -55,26 +65,37 @@ namespace Generador_X
             }
         }
 
-        private void panel_Click(object sender, EventArgs e)
+        private void Panel_Click(object sender, EventArgs e)
         {
-            if (focus != null)
+            if (FocusedControl == sender)
             {
-                focus.Invalidate();
+                //Deseleccionar el control.
+                FocusedControl = null;
+                (sender as Control).Invalidate();
             }
+            else
+            {
+                //Seleccionar el control.
+                if (FocusedControl != null)
+                {
+                    FocusedControl.Invalidate();
+                }
 
-            focus = sender as Control;
-            focus.Invalidate();
+                FocusedControl = sender as Control;
+                FocusedControl.Invalidate();
+            }
         }
 
-        private void style_Selected(object sender, PaintEventArgs e)
+        private void Style_Selected(object sender, PaintEventArgs e)
         {
-            if (sender == focus)
+            //Marcar control como seleccionado.
+            if (sender == FocusedControl)
             {
                 Color col = Color.DarkBlue;
                 ButtonBorderStyle bbs = ButtonBorderStyle.Solid;
                 int ancho = 4;
 
-                ControlPaint.DrawBorder(e.Graphics, this.focus.ClientRectangle, col, ancho, bbs,
+                ControlPaint.DrawBorder(e.Graphics, this.FocusedControl.ClientRectangle, col, ancho, bbs,
                                                                                 col, ancho, bbs,
                                                                                 col, ancho, bbs,
                                                                                 col, ancho, bbs);
@@ -83,8 +104,46 @@ namespace Generador_X
 
         private void BttnAddField_Click(object sender, EventArgs e)
         {
-            // Mostrar modal con los diferentes tipos de campos.
-            // Al elegir, scroll layoutpanel2 hasta el fondo
+            int indx;
+
+            FieldsTypeSelect fts = new FieldsTypeSelect();
+            var result = fts.ShowDialog();
+
+            if(result == DialogResult.OK)
+            {
+                FieldPanel p = new FieldPanel(StackedPanel, fts.ReturnValue1, fts.ReturnValue1);
+
+                p.Paint += new PaintEventHandler(Style_Selected);
+                p.Click += new EventHandler(Panel_Click);
+                p.MouseDoubleClick += new MouseEventHandler((object o, MouseEventArgs e) => { FocusedControl = null; p.Dispose(); });
+
+                StackedPanel.Controls.Add(p);
+
+                if (FocusedControl != null)
+                {
+                    indx = StackedPanel.Controls.IndexOf(FocusedControl);
+                    StackedPanel.Controls.SetChildIndex(p, indx + 1);
+                }
+
+                StackedPanel.ScrollControlIntoView(p);
+            }
+        }
+
+        private void StackedPanel_Resize(object sender, EventArgs e)
+        {
+            //Mantener el diseño en caso de cambio de tamaño del formulario.
+            if (StackedPanel.Controls.Count > 0)
+            {
+                foreach (Control c in StackedPanel.Controls)
+                {
+                    c.Width = StackedPanel.Width - WidthOffSet;
+                }
+
+                if (FocusedControl != null)
+                {
+                    FocusedControl.Invalidate();
+                }
+            }
         }
     }
 }
