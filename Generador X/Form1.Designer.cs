@@ -30,9 +30,9 @@ namespace Generador_X
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label label2;
             System.Windows.Forms.Label label4;
             System.Windows.Forms.Label label5;
+            System.Windows.Forms.Label label2;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.panel1 = new System.Windows.Forms.Panel();
             this.roundedButton2 = new Generador_X.Controls.RoundedButton();
@@ -44,9 +44,9 @@ namespace Generador_X
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.StackedPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -56,28 +56,19 @@ namespace Generador_X
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.panel5 = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            label2 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             label5 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.StackedPanel.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BttnAddField)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            label2.Location = new System.Drawing.Point(18, 8);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(177, 25);
-            label2.TabIndex = 0;
-            label2.Text = "Nombre del campo";
             // 
             // label4
             // 
@@ -98,6 +89,16 @@ namespace Generador_X
             label5.Size = new System.Drawing.Size(91, 25);
             label5.TabIndex = 0;
             label5.Text = "Opciones";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label2.Location = new System.Drawing.Point(18, 8);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(177, 25);
+            label2.TabIndex = 0;
+            label2.Text = "Nombre del campo";
             // 
             // panel1
             // 
@@ -149,6 +150,7 @@ namespace Generador_X
             this.roundedButton1.TabIndex = 0;
             this.roundedButton1.Text = "Generar";
             this.roundedButton1.UseVisualStyleBackColor = false;
+            this.roundedButton1.Click += new System.EventHandler(this.RoundedButton1_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -225,8 +227,8 @@ namespace Generador_X
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.flowLayoutPanel2);
             this.panel3.Controls.Add(this.pictureBox1);
-            this.panel3.Controls.Add(this.panel4);
             this.panel3.Controls.Add(this.button1);
             this.panel3.Controls.Add(this.textBox2);
             this.panel3.Location = new System.Drawing.Point(3, 3);
@@ -234,6 +236,29 @@ namespace Generador_X
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(775, 50);
             this.panel3.TabIndex = 0;
+            this.panel3.Visible = false;
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Controls.Add(this.numericUpDown1);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(384, 3);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(6);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(339, 43);
+            this.flowLayoutPanel2.TabIndex = 6;
+            this.flowLayoutPanel2.WrapContents = false;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(9, 9);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(50, 23);
+            this.numericUpDown1.TabIndex = 0;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            13,
+            0,
+            0,
+            0});
             // 
             // pictureBox1
             // 
@@ -241,31 +266,13 @@ namespace Generador_X
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Location = new System.Drawing.Point(730, 5);
+            this.pictureBox1.Location = new System.Drawing.Point(730, 3);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(5);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox1.Size = new System.Drawing.Size(40, 43);
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             this.toolTip1.SetToolTip(this.pictureBox1, "Añadir campo.");
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.label6);
-            this.panel4.Location = new System.Drawing.Point(385, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(339, 50);
-            this.panel4.TabIndex = 2;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label6.Location = new System.Drawing.Point(23, 15);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(124, 17);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Aqui van las opciones";
             // 
             // button1
             // 
@@ -374,9 +381,9 @@ namespace Generador_X
             this.StackedPanel.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BttnAddField)).EndInit();
@@ -397,7 +404,6 @@ namespace Generador_X
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.PictureBox BttnAddField;
         private System.Windows.Forms.Button BttnBajar;
@@ -407,9 +413,9 @@ namespace Generador_X
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
 

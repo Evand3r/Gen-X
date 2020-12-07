@@ -17,7 +17,7 @@ namespace Generador_X
         /// Campo seleccionado actuallmente.
         /// </summary>
         Control FocusedControl = null;
-        Random rand = new Random();
+        private readonly Random rand = new Random();
         /// <summary>
         /// Tamaño de los campos
         /// </summary>
@@ -42,7 +42,7 @@ namespace Generador_X
             }
             catch (Exception ex)
             {
-                //lol
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -61,7 +61,8 @@ namespace Generador_X
             }
             catch (Exception ex)
             {
-                //lol
+                MessageBox.Show(ex.ToString());
+
             }
         }
 
@@ -111,10 +112,11 @@ namespace Generador_X
 
             if(result == DialogResult.OK)
             {
-                FieldPanel p = new FieldPanel(StackedPanel, fts.ReturnValue1, fts.ReturnValue1);
+                FieldPanel p = new FieldPanel(StackedPanel, fts.Type);
 
                 p.Paint += new PaintEventHandler(Style_Selected);
                 p.Click += new EventHandler(Panel_Click);
+                //Añadir evento para boton de eliminar.
                 p.MouseDoubleClick += new MouseEventHandler((object o, MouseEventArgs e) => { FocusedControl = null; p.Dispose(); });
 
                 StackedPanel.Controls.Add(p);
@@ -142,6 +144,17 @@ namespace Generador_X
                 if (FocusedControl != null)
                 {
                     FocusedControl.Invalidate();
+                }
+            }
+        }
+
+        private void RoundedButton1_Click(object sender, EventArgs e)
+        {
+            foreach(FieldPanel fp in StackedPanel.Controls)
+            {
+                if(fp is FieldPanel)
+                {
+                    
                 }
             }
         }

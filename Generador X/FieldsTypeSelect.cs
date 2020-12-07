@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Generador_X.Controls;
+using Generador_X.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,26 +8,33 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
+
 namespace Generador_X
 {
     public partial class FieldsTypeSelect : Form
     {
-        public string ReturnValue1 { get; set; }
-        public string ReturnValue2 { get; set; }
+        public FieldType Type { get; set; }
 
         public FieldsTypeSelect()
         {
             InitializeComponent();
+
+            //Listar los tipos de campos.
+            foreach(KeyValuePair<string, FieldType> aFieldType in FieldTypes.Types)
+            {
+                FlowPanelFieldSelect.Controls.Add(new FieldSelect(aFieldType.Value, FieldSelect_Click));
+            };
+
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void SearchTB_TextChanged(object sender, EventArgs e)
         {
             //Filter fields
         }
 
-        private void panel2_Paint(object sender, EventArgs e)
+        private void FieldSelect_Click(object sender, EventArgs e)
         {
-            ReturnValue1 = (sender as Panel).Tag.ToString();
+            Type = ((sender as FieldSelect).Tag as FieldType);
             DialogResult = DialogResult.OK;
             Close();
         }

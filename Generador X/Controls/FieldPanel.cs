@@ -11,13 +11,21 @@ namespace Generador_X.Controls
 {
     class FieldPanel : Panel, IFieldBase
     {
+        public string FieldName;
+        public FieldType FieldType;
+        public string FieldCategory;
+
         private readonly TextBox TBFieldName;
         private readonly Button SelectType;
-        private readonly Panel OptionsPanel;
+        private readonly FlowLayoutPanel OptionsPanel;
         private readonly PictureBox RemoveSelf;
 
-        public FieldPanel(FlowLayoutPanel parent, string FieldName, string TypeName)
+        public FieldPanel(FlowLayoutPanel parent, FieldType fType)
         {
+            FieldType = fType;
+            FieldName = fType.Name;
+            FieldCategory = fType.BCategoryName;
+
             Size = new Size(parent.Width - 10, 50);
             MinimumSize = new Size(775, 50);
             BorderStyle = BorderStyle.FixedSingle;
@@ -37,7 +45,7 @@ namespace Generador_X.Controls
             {
                 Cursor = Cursors.Hand,
                 Location = new Point(215, 15),
-                Text = TypeName,
+                Text = fType.Name,
                 TextAlign = ContentAlignment.MiddleLeft,
                 Image = (Bitmap)resources.GetObject("Open Folder_50px"),
                 ImageAlign = ContentAlignment.MiddleRight,
@@ -45,13 +53,7 @@ namespace Generador_X.Controls
             };
 
             //Panel de opciones del campo.
-            OptionsPanel = new Panel
-            {
-                Location = new Point(385, 0),
-                Size = new Size(339, 50),
-                BorderStyle = BorderStyle.FixedSingle,
-            };
-            //OptionsPanel.Controls.Add(otions);
+            OptionsPanel = new OptionsPanel(FieldType);
 
             //Boton de elimiar el campo.
             RemoveSelf = new PictureBox
