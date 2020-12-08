@@ -35,13 +35,14 @@ namespace Generador_X
             System.Windows.Forms.Label label2;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.PreviewBttn = new Generador_X.Controls.RoundedButton();
-            this.GenerateBtn = new Generador_X.Controls.RoundedButton();
+            this.BTNPreview = new Generador_X.Controls.RoundedButton();
+            this.BTNGenerate = new Generador_X.Controls.RoundedButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.CBFormatoSalida = new System.Windows.Forms.ComboBox();
+            this.PanelFormatoOpciones = new System.Windows.Forms.FlowLayoutPanel();
             this.StackedPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
@@ -50,9 +51,10 @@ namespace Generador_X
             this.button1 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.BttnAddField = new System.Windows.Forms.PictureBox();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.BttnBajar = new System.Windows.Forms.Button();
             this.BttnSubir = new System.Windows.Forms.Button();
-            this.BttnAddField = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.panel5 = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -68,6 +70,7 @@ namespace Generador_X
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BttnAddField)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // label4
@@ -103,54 +106,55 @@ namespace Generador_X
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.PreviewBttn);
-            this.panel1.Controls.Add(this.GenerateBtn);
+            this.panel1.Controls.Add(this.BTNPreview);
+            this.panel1.Controls.Add(this.BTNGenerate);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 611);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(784, 50);
             this.panel1.TabIndex = 0;
             // 
-            // PreviewBttn
+            // BTNPreview
             // 
-            this.PreviewBttn.BackColor = System.Drawing.Color.White;
-            this.PreviewBttn.BorderColor = System.Drawing.Color.DimGray;
-            this.PreviewBttn.BorderDownColor = System.Drawing.Color.Empty;
-            this.PreviewBttn.BorderDownWidth = 0F;
-            this.PreviewBttn.BorderOverColor = System.Drawing.Color.Empty;
-            this.PreviewBttn.BorderOverWidth = 10F;
-            this.PreviewBttn.BorderRadius = 10;
-            this.PreviewBttn.BorderWidth = 1.75F;
-            this.PreviewBttn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PreviewBttn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.PreviewBttn.ForeColor = System.Drawing.Color.DimGray;
-            this.PreviewBttn.Location = new System.Drawing.Point(125, 10);
-            this.PreviewBttn.Name = "PreviewBttn";
-            this.PreviewBttn.Size = new System.Drawing.Size(100, 30);
-            this.PreviewBttn.TabIndex = 1;
-            this.PreviewBttn.Text = "Vista previa";
-            this.PreviewBttn.UseVisualStyleBackColor = false;
+            this.BTNPreview.BackColor = System.Drawing.Color.White;
+            this.BTNPreview.BorderColor = System.Drawing.Color.DimGray;
+            this.BTNPreview.BorderDownColor = System.Drawing.Color.Empty;
+            this.BTNPreview.BorderDownWidth = 0F;
+            this.BTNPreview.BorderOverColor = System.Drawing.Color.Empty;
+            this.BTNPreview.BorderOverWidth = 10F;
+            this.BTNPreview.BorderRadius = 10;
+            this.BTNPreview.BorderWidth = 1.75F;
+            this.BTNPreview.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTNPreview.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.BTNPreview.ForeColor = System.Drawing.Color.DimGray;
+            this.BTNPreview.Location = new System.Drawing.Point(125, 10);
+            this.BTNPreview.Name = "BTNPreview";
+            this.BTNPreview.Size = new System.Drawing.Size(100, 30);
+            this.BTNPreview.TabIndex = 1;
+            this.BTNPreview.Text = "Vista previa";
+            this.BTNPreview.UseVisualStyleBackColor = false;
+            this.BTNPreview.Click += new System.EventHandler(this.BTNPreview_Click);
             // 
-            // GenerateBtn
+            // BTNGenerate
             // 
-            this.GenerateBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(150)))), ((int)(((byte)(170)))));
-            this.GenerateBtn.BorderColor = System.Drawing.Color.Transparent;
-            this.GenerateBtn.BorderDownColor = System.Drawing.Color.Empty;
-            this.GenerateBtn.BorderDownWidth = 0F;
-            this.GenerateBtn.BorderOverColor = System.Drawing.Color.Empty;
-            this.GenerateBtn.BorderOverWidth = 10F;
-            this.GenerateBtn.BorderRadius = 10;
-            this.GenerateBtn.BorderWidth = 1.75F;
-            this.GenerateBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.GenerateBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.GenerateBtn.ForeColor = System.Drawing.Color.White;
-            this.GenerateBtn.Location = new System.Drawing.Point(11, 10);
-            this.GenerateBtn.Name = "GenerateBtn";
-            this.GenerateBtn.Size = new System.Drawing.Size(100, 30);
-            this.GenerateBtn.TabIndex = 0;
-            this.GenerateBtn.Text = "Generar";
-            this.GenerateBtn.UseVisualStyleBackColor = false;
-            this.GenerateBtn.Click += new System.EventHandler(this.RoundedButton1_Click);
+            this.BTNGenerate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(150)))), ((int)(((byte)(170)))));
+            this.BTNGenerate.BorderColor = System.Drawing.Color.Transparent;
+            this.BTNGenerate.BorderDownColor = System.Drawing.Color.Empty;
+            this.BTNGenerate.BorderDownWidth = 0F;
+            this.BTNGenerate.BorderOverColor = System.Drawing.Color.Empty;
+            this.BTNGenerate.BorderOverWidth = 10F;
+            this.BTNGenerate.BorderRadius = 10;
+            this.BTNGenerate.BorderWidth = 1.75F;
+            this.BTNGenerate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTNGenerate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.BTNGenerate.ForeColor = System.Drawing.Color.White;
+            this.BTNGenerate.Location = new System.Drawing.Point(11, 10);
+            this.BTNGenerate.Name = "BTNGenerate";
+            this.BTNGenerate.Size = new System.Drawing.Size(100, 30);
+            this.BTNGenerate.TabIndex = 0;
+            this.BTNGenerate.Text = "Generar";
+            this.BTNGenerate.UseVisualStyleBackColor = false;
+            this.BTNGenerate.Click += new System.EventHandler(this.BTNGenerar_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -158,7 +162,8 @@ namespace Generador_X
             this.flowLayoutPanel1.Controls.Add(this.label1);
             this.flowLayoutPanel1.Controls.Add(this.textBox1);
             this.flowLayoutPanel1.Controls.Add(this.label3);
-            this.flowLayoutPanel1.Controls.Add(this.comboBox1);
+            this.flowLayoutPanel1.Controls.Add(this.CBFormatoSalida);
+            this.flowLayoutPanel1.Controls.Add(this.PanelFormatoOpciones);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 571);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -180,8 +185,10 @@ namespace Generador_X
             this.textBox1.Location = new System.Drawing.Point(81, 7);
             this.textBox1.Margin = new System.Windows.Forms.Padding(0, 7, 3, 3);
             this.textBox1.Name = "textBox1";
+            this.textBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.textBox1.Size = new System.Drawing.Size(71, 23);
             this.textBox1.TabIndex = 3;
+            this.textBox1.Text = "500";
             // 
             // label3
             // 
@@ -193,11 +200,11 @@ namespace Generador_X
             this.label3.TabIndex = 4;
             this.label3.Text = "Formato:";
             // 
-            // comboBox1
+            // CBFormatoSalida
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.CBFormatoSalida.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CBFormatoSalida.FormattingEnabled = true;
+            this.CBFormatoSalida.Items.AddRange(new object[] {
             "SQL",
             "JSON",
             "CSV",
@@ -205,11 +212,20 @@ namespace Generador_X
             "Excel",
             "XML",
             "Personalizado"});
-            this.comboBox1.Location = new System.Drawing.Point(218, 7);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 7, 3, 3);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(103, 23);
-            this.comboBox1.TabIndex = 5;
+            this.CBFormatoSalida.Location = new System.Drawing.Point(218, 7);
+            this.CBFormatoSalida.Margin = new System.Windows.Forms.Padding(3, 7, 3, 3);
+            this.CBFormatoSalida.Name = "CBFormatoSalida";
+            this.CBFormatoSalida.Size = new System.Drawing.Size(103, 23);
+            this.CBFormatoSalida.TabIndex = 5;
+            this.CBFormatoSalida.SelectedIndexChanged += new System.EventHandler(this.CBFormatoSalida_SelectedIndexChanged);
+            // 
+            // PanelFormatoOpciones
+            // 
+            this.PanelFormatoOpciones.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.PanelFormatoOpciones.Location = new System.Drawing.Point(327, 3);
+            this.PanelFormatoOpciones.Name = "PanelFormatoOpciones";
+            this.PanelFormatoOpciones.Size = new System.Drawing.Size(450, 29);
+            this.PanelFormatoOpciones.TabIndex = 6;
             // 
             // StackedPanel
             // 
@@ -236,6 +252,7 @@ namespace Generador_X
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(775, 50);
             this.panel3.TabIndex = 0;
+            this.panel3.Visible = false;
             // 
             // flowLayoutPanel2
             // 
@@ -285,7 +302,6 @@ namespace Generador_X
             this.button1.Text = "button1";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // textBox2
             // 
@@ -296,41 +312,16 @@ namespace Generador_X
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.BttnBajar);
-            this.panel2.Controls.Add(this.BttnSubir);
             this.panel2.Controls.Add(this.BttnAddField);
             this.panel2.Controls.Add(label5);
             this.panel2.Controls.Add(label4);
             this.panel2.Controls.Add(label2);
+            this.panel2.Controls.Add(this.panel4);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 24);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(784, 50);
             this.panel2.TabIndex = 1;
-            // 
-            // BttnBajar
-            // 
-            this.BttnBajar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BttnBajar.BackgroundImage")));
-            this.BttnBajar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BttnBajar.Location = new System.Drawing.Point(692, 6);
-            this.BttnBajar.Name = "BttnBajar";
-            this.BttnBajar.Size = new System.Drawing.Size(35, 35);
-            this.BttnBajar.TabIndex = 3;
-            this.toolTip1.SetToolTip(this.BttnBajar, "Mover campo hacia abajo.");
-            this.BttnBajar.UseVisualStyleBackColor = true;
-            this.BttnBajar.Click += new System.EventHandler(this.Button2_Click);
-            // 
-            // BttnSubir
-            // 
-            this.BttnSubir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BttnSubir.BackgroundImage")));
-            this.BttnSubir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BttnSubir.Location = new System.Drawing.Point(646, 6);
-            this.BttnSubir.Name = "BttnSubir";
-            this.BttnSubir.Size = new System.Drawing.Size(35, 35);
-            this.BttnSubir.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.BttnSubir, "Mover campo hacia arriba.");
-            this.BttnSubir.UseVisualStyleBackColor = true;
-            this.BttnSubir.Click += new System.EventHandler(this.Button1_Click);
             // 
             // BttnAddField
             // 
@@ -346,6 +337,40 @@ namespace Generador_X
             this.BttnAddField.TabStop = false;
             this.toolTip1.SetToolTip(this.BttnAddField, "Añadir campo.");
             this.BttnAddField.Click += new System.EventHandler(this.BttnAddField_Click);
+            // 
+            // panel4
+            // 
+            this.panel4.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.panel4.Controls.Add(this.BttnBajar);
+            this.panel4.Controls.Add(this.BttnSubir);
+            this.panel4.Location = new System.Drawing.Point(646, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(81, 41);
+            this.panel4.TabIndex = 4;
+            // 
+            // BttnBajar
+            // 
+            this.BttnBajar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BttnBajar.BackgroundImage")));
+            this.BttnBajar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BttnBajar.Location = new System.Drawing.Point(46, 3);
+            this.BttnBajar.Name = "BttnBajar";
+            this.BttnBajar.Size = new System.Drawing.Size(35, 35);
+            this.BttnBajar.TabIndex = 4;
+            this.toolTip1.SetToolTip(this.BttnBajar, "Mover campo hacia abajo.");
+            this.BttnBajar.UseVisualStyleBackColor = true;
+            this.BttnBajar.Click += new System.EventHandler(this.BtnBajar_Click);
+            // 
+            // BttnSubir
+            // 
+            this.BttnSubir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BttnSubir.BackgroundImage")));
+            this.BttnSubir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BttnSubir.Location = new System.Drawing.Point(0, 3);
+            this.BttnSubir.Name = "BttnSubir";
+            this.BttnSubir.Size = new System.Drawing.Size(35, 35);
+            this.BttnSubir.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.BttnSubir, "Mover campo hacia arriba.");
+            this.BttnSubir.UseVisualStyleBackColor = true;
+            this.BttnSubir.Click += new System.EventHandler(this.BtnSubir_Click);
             // 
             // menuStrip1
             // 
@@ -388,6 +413,7 @@ namespace Generador_X
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BttnAddField)).EndInit();
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -398,17 +424,15 @@ namespace Generador_X
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel StackedPanel;
-        private Controls.RoundedButton GenerateBtn;
-        private Controls.RoundedButton PreviewBttn;
+        private Controls.RoundedButton BTNGenerate;
+        private Controls.RoundedButton BTNPreview;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox CBFormatoSalida;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.PictureBox BttnAddField;
-        private System.Windows.Forms.Button BttnBajar;
-        private System.Windows.Forms.Button BttnSubir;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Panel panel3;
@@ -417,6 +441,10 @@ namespace Generador_X
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button BttnBajar;
+        private System.Windows.Forms.Button BttnSubir;
+        private System.Windows.Forms.FlowLayoutPanel PanelFormatoOpciones;
     }
 }
 

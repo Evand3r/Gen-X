@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.Json;
-using Generador_X.Model.Categories;
 
 namespace Generador_X
 {

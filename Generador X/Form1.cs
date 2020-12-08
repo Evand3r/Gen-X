@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Generador_X.Controls;
+using Generador_X.Controls.ModifiedControls;
 using Generador_X.Model;
 
 namespace Generador_X
@@ -19,17 +20,20 @@ namespace Generador_X
         /// </summary>
         Control FocusedControl = null;
         private readonly Random rand = new Random();
+
         /// <summary>
         /// Tamaño de los campos
         /// </summary>
-        int WidthOffSet = 20;
+        readonly int WidthOffSet = 20;
 
         public MainView()
         {
             InitializeComponent();
+
+            CBFormatoSalida.SelectedIndex = 0;
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void BtnSubir_Click(object sender, EventArgs e)
         {
             try
             {
@@ -47,7 +51,7 @@ namespace Generador_X
             }
         }
 
-        private void Button2_Click(object sender, EventArgs e)
+        private void BtnBajar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -180,7 +184,7 @@ namespace Generador_X
             }
         }
 
-        private void RoundedButton1_Click(object sender, EventArgs e)
+        private void BTNGenerar_Click(object sender, EventArgs e)
         {
             foreach (FieldPanel fp in StackedPanel.Controls)
             {
@@ -191,9 +195,32 @@ namespace Generador_X
             }
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void BTNPreview_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void CBFormatoSalida_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PanelFormatoOpciones.SuspendLayout();
+            PanelFormatoOpciones.Controls.Clear();
+
+            List<Control> opciones = new List<Control>();
+
+            switch (CBFormatoSalida.SelectedIndex)
+            {
+                case 0: //SQL
+                    Label lbl = new Label_("Nombre de la Tabla");
+                    TextBox tbxTableName = new TextBox { Width = 120, Text = "GEN X" };
+                    CheckBox ckbxCreateTable = new CheckBox { Text = "Incluir crear tabla", AutoSize = true };
+                    opciones.AddRange(new Control[] { lbl, tbxTableName, ckbxCreateTable });
+                    break;
+                default:
+                    break;
+            }
+
+            PanelFormatoOpciones.Controls.AddRange(opciones.ToArray());
+            PanelFormatoOpciones.ResumeLayout();
         }
     }
 }
