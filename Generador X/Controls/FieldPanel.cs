@@ -28,7 +28,7 @@ namespace Generador_X.Controls
             }
             else
             {
-                FieldName = fType.fName;
+                FieldName = fType.columnName;
             }
 
             FieldType = fType;
@@ -53,7 +53,7 @@ namespace Generador_X.Controls
             {
                 Cursor = Cursors.Hand,
                 Location = new Point(215, 15),
-                Text = fType.fName,
+                Text = fType.SearchName,
                 TextAlign = ContentAlignment.MiddleLeft,
                 Image = (Bitmap)resources.GetObject("Open Folder_50px"),
                 ImageAlign = ContentAlignment.MiddleRight,

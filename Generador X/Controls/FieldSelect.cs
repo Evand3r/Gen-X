@@ -17,15 +17,15 @@ namespace Generador_X.Controls
         {
             Label labelExmples = new Label
             {
+                Text = field.Example,
                 AutoSize = true,
                 Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point),
                 Location = new System.Drawing.Point(-1, 38),
-                Text = field.Example,
             };
 
             Label labelTitle = new Label
             {
-                Text = field.fName,
+                Text = field.SearchName,
                 AutoSize = true,
                 Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point),
                 Location = new System.Drawing.Point(-1, -1),
