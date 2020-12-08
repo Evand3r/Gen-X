@@ -19,7 +19,6 @@ namespace Generador_X
         /// Campo seleccionado actuallmente.
         /// </summary>
         Control FocusedControl = null;
-        private readonly Random rand = new Random();
 
         /// <summary>
         /// Tamaño de los campos
@@ -30,7 +29,9 @@ namespace Generador_X
         {
             InitializeComponent();
 
+            //Seleccionar formato SQL
             CBFormatoSalida.SelectedIndex = 0;
+            CreateDefaultFields();
         }
 
         private void BtnSubir_Click(object sender, EventArgs e)
@@ -119,12 +120,7 @@ namespace Generador_X
             {
                 StackedPanel.SuspendLayout();
 
-                FieldPanel p = new FieldPanel(StackedPanel, fts.Type);
-
-                p.Paint += new PaintEventHandler(Style_Selected);
-                p.Click += new EventHandler(Panel_Click);
-                //Añadir evento para boton de eliminar.
-                p.MouseDoubleClick += new MouseEventHandler((object o, MouseEventArgs e) => { FocusedControl = null; p.Dispose(); });
+                FieldPanel p = CreateField(fts.Type);
 
                 StackedPanel.Controls.Add(p);
 
@@ -170,12 +166,7 @@ namespace Generador_X
 
                 indx = StackedPanel.Controls.IndexOf((sender as Button).Parent);
 
-                FieldPanel p = new FieldPanel(StackedPanel, fts.Type, prevField.TBFieldName.Text);
-
-                p.Paint += new PaintEventHandler(Style_Selected);
-                p.Click += new EventHandler(Panel_Click);
-                //Añadir evento para boton de eliminar.
-                p.MouseDoubleClick += new MouseEventHandler((object o, MouseEventArgs e) => { FocusedControl = null; p.Dispose(); });
+                FieldPanel p = CreateField(fts.Type, prevField.TBFieldName.Text);
 
                 StackedPanel.Controls.RemoveAt(indx);
                 StackedPanel.Controls.Add(p);
@@ -221,6 +212,34 @@ namespace Generador_X
 
             PanelFormatoOpciones.Controls.AddRange(opciones.ToArray());
             PanelFormatoOpciones.ResumeLayout();
+        }
+
+        private void CreateDefaultFields()
+        {
+            StackedPanel.SuspendLayout();
+
+            List<Control> cntrls = new List<Control>
+            {
+                CreateField(FieldTypes.Types[EFieldTypes.id]),
+                CreateField(FieldTypes.Types[EFieldTypes.FirstName]),
+                CreateField(FieldTypes.Types[EFieldTypes.Date]),
+                CreateField(FieldTypes.Types[EFieldTypes.FullName]),
+            };
+
+            StackedPanel.Controls.AddRange(cntrls.ToArray());
+            StackedPanel.ResumeLayout();
+        }
+
+        private FieldPanel CreateField(FieldType type, string name = "")
+        {
+            FieldPanel p = new FieldPanel(StackedPanel, type, name);
+
+            p.Paint += new PaintEventHandler(Style_Selected);
+            p.Click += new EventHandler(Panel_Click);
+            //Añadir evento para boton de eliminar.
+            p.MouseDoubleClick += new MouseEventHandler((object o, MouseEventArgs e) => { FocusedControl = null; p.Dispose(); });
+
+            return p;
         }
     }
 }

@@ -7,15 +7,15 @@ namespace Generador_X.Model
 {
     public class FieldTypes
     {
-        public static Dictionary<string, FieldType> Types = new Dictionary<string, FieldType>
+        public static Dictionary<EFieldTypes, FieldType> Types = new Dictionary<EFieldTypes, FieldType>
         {
             //Interno
-            {"Nombre Fila", new FieldType("id", "NumeroFila", Categories.Basico, "", "", "1\n\r2\n\r3")},
+            {EFieldTypes.id, new FieldType("id", "NumeroFila", Categories.Basico, "", "", "1\n\r2\n\r3")},
             //Date
-            {"Fecha", new FieldType("fecha", "Fecha", Categories.Fecha, "Date", "Between", "7.1.2011\n\r15-feb-1996\n\r1 Enero 1492") },
+            {EFieldTypes.Date, new FieldType("fecha", "Fecha", Categories.Fecha, "Date", "Between", "7.1.2011\n\r15-feb-1996\n\r1 Enero 1492") },
             //Name
-            {"Nombre", new FieldType("primer nombre", "Primer Nombre", Categories.Nombre, "Name", "FirstName", "Shamil\n\rAdonis\n\rTiatira")},
-            {"Nombre Completo", new FieldType("nombre completo", "Nombre Completo", Categories.Nombre, "Name", "FullName", "Shamil Carela\n\rAdonis Castillo\n\rAngelica María Rijo")},
+            {EFieldTypes.FirstName, new FieldType("primer nombre", "Primer Nombre", Categories.Nombre, "Name", "FirstName", "Shamil\n\rAdonis\n\rTiatira")},
+            {EFieldTypes.FullName, new FieldType("nombre completo", "Nombre Completo", Categories.Nombre, "Name", "FullName", "Shamil Carela\n\rAdonis Castillo\n\rAngelica María Rijo")},
             //
         };
     }
@@ -47,5 +47,15 @@ namespace Generador_X.Model
             this.BCategoryName = BCategoryName;
             this.Example = example;
         }
+    }
+
+    public enum EFieldTypes
+    {
+        id,
+        //Date
+        Date,
+        //Name
+        FirstName,
+        FullName,
     }
 }

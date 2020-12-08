@@ -20,7 +20,7 @@ namespace Generador_X
             InitializeComponent();
 
             //Listar los tipos de campos.
-            foreach(KeyValuePair<string, FieldType> aFieldType in FieldTypes.Types)
+            foreach(KeyValuePair<EFieldTypes, FieldType> aFieldType in FieldTypes.Types)
             {
                 FlowPanelFieldSelect.Controls.Add(new FieldSelect(aFieldType.Value, FieldSelect_Click));
             };
