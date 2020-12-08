@@ -31,17 +31,18 @@ namespace Generador_X.Model
                     panelControls.AddRange(new Control[] { DTFrom, lblto, DTTo });
                     break;
                 default:
-                    Label lblBlanks = new Label_("Nulos");
-                    NumericUpDown NullsCount = new NumericUpDown
-                    {
-                        Width = 50,
-                        DecimalPlaces = 0,
-                        Anchor = AnchorStyles.Right,
-                    };
-                    NullsCount.Controls.RemoveAt(0);
-                    panelControls.AddRange(new Control[] { lblBlanks, NullsCount });
                     break;
             }
+
+            Label lblBlanks = new Label_("Nulos");
+            NumericUpDown NullsCount = new NumericUpDown
+            {
+                Width = 50,
+                DecimalPlaces = 0,
+                Anchor = AnchorStyles.Right,
+            };
+            NullsCount.Controls.RemoveAt(0);
+            panelControls.AddRange(new Control[] { lblBlanks, NullsCount });
 
             if (panelControls.Count != 0)
             {

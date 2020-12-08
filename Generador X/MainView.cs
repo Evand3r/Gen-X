@@ -218,15 +218,12 @@ namespace Generador_X
         {
             StackedPanel.SuspendLayout();
 
-            List<Control> cntrls = new List<Control>
-            {
+            StackedPanel.Controls.AddRange(new Control[] {
                 CreateField(FieldTypes.Types[EFieldTypes.id]),
                 CreateField(FieldTypes.Types[EFieldTypes.FirstName]),
                 CreateField(FieldTypes.Types[EFieldTypes.Date]),
                 CreateField(FieldTypes.Types[EFieldTypes.FullName]),
-            };
-
-            StackedPanel.Controls.AddRange(cntrls.ToArray());
+            });
             StackedPanel.ResumeLayout();
         }
 
