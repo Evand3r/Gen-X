@@ -12,15 +12,15 @@ namespace Generador_X.Model
         public OptionsPanel(FieldType fieldType)
         {
             Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            Location = new Point(384, 3);
-            Size = new Size(339, 43);
+            Location = new Point(384, 5);
+            Size = new Size(339, 38);
             //BorderStyle = BorderStyle.FixedSingle;
-            Padding = new Padding(6);
+            Padding = new Padding(4);
             List<Control> panelControls = new List<Control>();
 
             SuspendLayout();
 
-            switch (fieldType.fName)
+            switch (fieldType.SearchName)
             {
                 case "Fecha":
                     DateTimePick_ DTFrom = new DateTimePick_(DateTime.Now.AddYears(-1));
