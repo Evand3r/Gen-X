@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Generador_X.Controls;
+using Generador_X.Model;
 
 namespace Generador_X
 {
@@ -110,8 +111,10 @@ namespace Generador_X
             FieldsTypeSelect fts = new FieldsTypeSelect();
             var result = fts.ShowDialog();
 
-            if(result == DialogResult.OK)
+            if (result == DialogResult.OK)
             {
+                StackedPanel.SuspendLayout();
+
                 FieldPanel p = new FieldPanel(StackedPanel, fts.Type);
 
                 p.Paint += new PaintEventHandler(Style_Selected);
@@ -128,6 +131,7 @@ namespace Generador_X
                 }
 
                 StackedPanel.ScrollControlIntoView(p);
+                StackedPanel.ResumeLayout();
             }
         }
 
@@ -148,15 +152,48 @@ namespace Generador_X
             }
         }
 
+        public void ChangeField(object sender, EventArgs e)
+        {
+            int indx;
+            FieldPanel prevField = (sender as Button).Parent as FieldPanel;
+
+            FieldsTypeSelect fts = new FieldsTypeSelect();
+            var result = fts.ShowDialog();
+
+            if (result == DialogResult.OK && prevField.FieldType.BName != fts.Type.BName)
+            {
+                StackedPanel.SuspendLayout();
+
+                indx = StackedPanel.Controls.IndexOf((sender as Button).Parent);
+
+                FieldPanel p = new FieldPanel(StackedPanel, fts.Type, prevField.TBFieldName.Text);
+
+                p.Paint += new PaintEventHandler(Style_Selected);
+                p.Click += new EventHandler(Panel_Click);
+                //Añadir evento para boton de eliminar.
+                p.MouseDoubleClick += new MouseEventHandler((object o, MouseEventArgs e) => { FocusedControl = null; p.Dispose(); });
+
+                StackedPanel.Controls.RemoveAt(indx);
+                StackedPanel.Controls.Add(p);
+                StackedPanel.Controls.SetChildIndex(p, indx);
+                StackedPanel.ResumeLayout();
+            }
+        }
+
         private void RoundedButton1_Click(object sender, EventArgs e)
         {
-            foreach(FieldPanel fp in StackedPanel.Controls)
+            foreach (FieldPanel fp in StackedPanel.Controls)
             {
-                if(fp is FieldPanel)
+                if (fp is FieldPanel)
                 {
-                    
+
                 }
             }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

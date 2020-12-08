@@ -35,8 +35,8 @@ namespace Generador_X
             System.Windows.Forms.Label label2;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.roundedButton2 = new Generador_X.Controls.RoundedButton();
-            this.roundedButton1 = new Generador_X.Controls.RoundedButton();
+            this.PreviewBttn = new Generador_X.Controls.RoundedButton();
+            this.GenerateBtn = new Generador_X.Controls.RoundedButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -103,54 +103,54 @@ namespace Generador_X
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.roundedButton2);
-            this.panel1.Controls.Add(this.roundedButton1);
+            this.panel1.Controls.Add(this.PreviewBttn);
+            this.panel1.Controls.Add(this.GenerateBtn);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 611);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(784, 50);
             this.panel1.TabIndex = 0;
             // 
-            // roundedButton2
+            // PreviewBttn
             // 
-            this.roundedButton2.BackColor = System.Drawing.Color.White;
-            this.roundedButton2.BorderColor = System.Drawing.Color.DimGray;
-            this.roundedButton2.BorderDownColor = System.Drawing.Color.Empty;
-            this.roundedButton2.BorderDownWidth = 0F;
-            this.roundedButton2.BorderOverColor = System.Drawing.Color.Empty;
-            this.roundedButton2.BorderOverWidth = 10F;
-            this.roundedButton2.BorderRadius = 10;
-            this.roundedButton2.BorderWidth = 1.75F;
-            this.roundedButton2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.roundedButton2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.roundedButton2.ForeColor = System.Drawing.Color.DimGray;
-            this.roundedButton2.Location = new System.Drawing.Point(125, 10);
-            this.roundedButton2.Name = "roundedButton2";
-            this.roundedButton2.Size = new System.Drawing.Size(100, 30);
-            this.roundedButton2.TabIndex = 1;
-            this.roundedButton2.Text = "Vista previa";
-            this.roundedButton2.UseVisualStyleBackColor = false;
+            this.PreviewBttn.BackColor = System.Drawing.Color.White;
+            this.PreviewBttn.BorderColor = System.Drawing.Color.DimGray;
+            this.PreviewBttn.BorderDownColor = System.Drawing.Color.Empty;
+            this.PreviewBttn.BorderDownWidth = 0F;
+            this.PreviewBttn.BorderOverColor = System.Drawing.Color.Empty;
+            this.PreviewBttn.BorderOverWidth = 10F;
+            this.PreviewBttn.BorderRadius = 10;
+            this.PreviewBttn.BorderWidth = 1.75F;
+            this.PreviewBttn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PreviewBttn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.PreviewBttn.ForeColor = System.Drawing.Color.DimGray;
+            this.PreviewBttn.Location = new System.Drawing.Point(125, 10);
+            this.PreviewBttn.Name = "PreviewBttn";
+            this.PreviewBttn.Size = new System.Drawing.Size(100, 30);
+            this.PreviewBttn.TabIndex = 1;
+            this.PreviewBttn.Text = "Vista previa";
+            this.PreviewBttn.UseVisualStyleBackColor = false;
             // 
-            // roundedButton1
+            // GenerateBtn
             // 
-            this.roundedButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(150)))), ((int)(((byte)(170)))));
-            this.roundedButton1.BorderColor = System.Drawing.Color.Transparent;
-            this.roundedButton1.BorderDownColor = System.Drawing.Color.Empty;
-            this.roundedButton1.BorderDownWidth = 0F;
-            this.roundedButton1.BorderOverColor = System.Drawing.Color.Empty;
-            this.roundedButton1.BorderOverWidth = 10F;
-            this.roundedButton1.BorderRadius = 10;
-            this.roundedButton1.BorderWidth = 1.75F;
-            this.roundedButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.roundedButton1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.roundedButton1.ForeColor = System.Drawing.Color.White;
-            this.roundedButton1.Location = new System.Drawing.Point(11, 10);
-            this.roundedButton1.Name = "roundedButton1";
-            this.roundedButton1.Size = new System.Drawing.Size(100, 30);
-            this.roundedButton1.TabIndex = 0;
-            this.roundedButton1.Text = "Generar";
-            this.roundedButton1.UseVisualStyleBackColor = false;
-            this.roundedButton1.Click += new System.EventHandler(this.RoundedButton1_Click);
+            this.GenerateBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(150)))), ((int)(((byte)(170)))));
+            this.GenerateBtn.BorderColor = System.Drawing.Color.Transparent;
+            this.GenerateBtn.BorderDownColor = System.Drawing.Color.Empty;
+            this.GenerateBtn.BorderDownWidth = 0F;
+            this.GenerateBtn.BorderOverColor = System.Drawing.Color.Empty;
+            this.GenerateBtn.BorderOverWidth = 10F;
+            this.GenerateBtn.BorderRadius = 10;
+            this.GenerateBtn.BorderWidth = 1.75F;
+            this.GenerateBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.GenerateBtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.GenerateBtn.ForeColor = System.Drawing.Color.White;
+            this.GenerateBtn.Location = new System.Drawing.Point(11, 10);
+            this.GenerateBtn.Name = "GenerateBtn";
+            this.GenerateBtn.Size = new System.Drawing.Size(100, 30);
+            this.GenerateBtn.TabIndex = 0;
+            this.GenerateBtn.Text = "Generar";
+            this.GenerateBtn.UseVisualStyleBackColor = false;
+            this.GenerateBtn.Click += new System.EventHandler(this.RoundedButton1_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -236,15 +236,15 @@ namespace Generador_X
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(775, 50);
             this.panel3.TabIndex = 0;
-            this.panel3.Visible = false;
             // 
             // flowLayoutPanel2
             // 
+            this.flowLayoutPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel2.Controls.Add(this.numericUpDown1);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(384, 3);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(384, 4);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(6);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(339, 43);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(339, 40);
             this.flowLayoutPanel2.TabIndex = 6;
             this.flowLayoutPanel2.WrapContents = false;
             // 
@@ -285,6 +285,7 @@ namespace Generador_X
             this.button1.Text = "button1";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // textBox2
             // 
@@ -397,8 +398,8 @@ namespace Generador_X
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel StackedPanel;
-        private Controls.RoundedButton roundedButton1;
-        private Controls.RoundedButton roundedButton2;
+        private Controls.RoundedButton GenerateBtn;
+        private Controls.RoundedButton PreviewBttn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;

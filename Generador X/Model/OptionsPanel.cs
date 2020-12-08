@@ -11,15 +11,16 @@ namespace Generador_X.Model
     {
         public OptionsPanel(FieldType fieldType)
         {
-            Location = new Point(385, 0);
-            Size = new Size(339, 50);
-            BorderStyle = BorderStyle.FixedSingle;
+            Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            Location = new Point(384, 3);
+            Size = new Size(339, 43);
+            //BorderStyle = BorderStyle.FixedSingle;
             Padding = new Padding(6);
             List<Control> panelControls = new List<Control>();
 
             SuspendLayout();
 
-            switch (fieldType.Name)
+            switch (fieldType.fName)
             {
                 case "Fecha":
                     DateTimePick_ DTFrom = new DateTimePick_(DateTime.Now.AddYears(-1));
@@ -30,23 +31,17 @@ namespace Generador_X.Model
                     panelControls.AddRange(new Control[] { DTFrom, lblto, DTTo });
                     break;
                 default:
-                    Label label = new Label { Text = "Basico" };
-                    Controls.Add(label);
+                    Label lblBlanks = new Label_("Nulos");
+                    NumericUpDown NullsCount = new NumericUpDown
+                    {
+                        Width = 50,
+                        DecimalPlaces = 0,
+                        Anchor = AnchorStyles.Right,
+                    };
+                    NullsCount.Controls.RemoveAt(0);
+                    panelControls.AddRange(new Control[] { lblBlanks, NullsCount });
                     break;
             }
-
-
-            Label lblBlanks = new Label_("Nulos");
-            NumericUpDown NullsCount = new NumericUpDown
-            {
-                Width = 50,
-                DecimalPlaces = 0,
-                Anchor = AnchorStyles.Right,
-            };
-
-            NullsCount.Controls.RemoveAt(0);
-
-            panelControls.AddRange(new Control[] { lblBlanks, NullsCount });
 
             if (panelControls.Count != 0)
             {

@@ -14,16 +14,24 @@ namespace Generador_X.Controls
         public string FieldName;
         public FieldType FieldType;
         public string FieldCategory;
+        public readonly TextBox TBFieldName;
 
-        private readonly TextBox TBFieldName;
         private readonly Button SelectType;
         private readonly FlowLayoutPanel OptionsPanel;
         private readonly PictureBox RemoveSelf;
 
-        public FieldPanel(FlowLayoutPanel parent, FieldType fType)
+        public FieldPanel(FlowLayoutPanel parent, FieldType fType, string fName = "")
         {
+            if (fName != "")
+            {
+                FieldName = fName;
+            }
+            else
+            {
+                FieldName = fType.fName;
+            }
+
             FieldType = fType;
-            FieldName = fType.Name;
             FieldCategory = fType.BCategoryName;
 
             Size = new Size(parent.Width - 10, 50);
@@ -45,12 +53,15 @@ namespace Generador_X.Controls
             {
                 Cursor = Cursors.Hand,
                 Location = new Point(215, 15),
-                Text = fType.Name,
+                Text = fType.fName,
                 TextAlign = ContentAlignment.MiddleLeft,
                 Image = (Bitmap)resources.GetObject("Open Folder_50px"),
                 ImageAlign = ContentAlignment.MiddleRight,
                 Size = new Size(120, 23),
             };
+
+            //Añadir evento de cambiar tipo de campo.
+            SelectType.Click += new EventHandler((parent.Parent as MainView).ChangeField);
 
             //Panel de opciones del campo.
             OptionsPanel = new OptionsPanel(FieldType);
@@ -61,11 +72,11 @@ namespace Generador_X.Controls
                 Cursor = Cursors.Hand,
                 Width = 40,
                 Height = 40,
-                Anchor = (AnchorStyles.Top | AnchorStyles.Right),
+                Anchor = AnchorStyles.Right,
                 BackgroundImageLayout = ImageLayout.Zoom,
                 BackgroundImage = (Bitmap)resources.GetObject("Cancel_48px"),
                 Margin = new Padding(5),
-                Location = new Point(732, 5)
+                Location = new Point(parent.Width - 53, 5)
             };
 
             RemoveSelf.Click += new EventHandler(Remove);

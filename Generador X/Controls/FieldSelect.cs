@@ -25,7 +25,7 @@ namespace Generador_X.Controls
 
             Label labelTitle = new Label
             {
-                Text = field.Name,
+                Text = field.fName,
                 AutoSize = true,
                 Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point),
                 Location = new System.Drawing.Point(-1, -1),
