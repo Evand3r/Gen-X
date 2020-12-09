@@ -1,5 +1,6 @@
 ﻿using Generador_X.Controls;
 using Generador_X.Model;
+using Generador_X.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +21,7 @@ namespace Generador_X
             InitializeComponent();
 
             //Listar los tipos de campos.
-            foreach(KeyValuePair<EFieldTypes, FieldType> aFieldType in FieldTypes.Types)
+            foreach(KeyValuePair<EFieldType, FieldType> aFieldType in FieldTypes.Types)
             {
                 FlowPanelFieldSelect.Controls.Add(new FieldSelect(aFieldType.Value, FieldSelect_Click));
             };

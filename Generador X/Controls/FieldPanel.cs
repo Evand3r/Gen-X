@@ -5,6 +5,7 @@ using System.Resources;
 using System.Text;
 using System.Windows.Forms;
 using Generador_X.Model;
+using Generador_X.Model.Enums;
 using Generador_X.Properties;
 
 namespace Generador_X.Controls
@@ -13,7 +14,7 @@ namespace Generador_X.Controls
     {
         public string FieldName;
         public FieldType FieldType;
-        public string FieldCategory;
+        public EBCategory FieldCategory;
         public readonly TextBox TBFieldName;
         public readonly OptionsPanel OptionsPanel;
 
@@ -28,7 +29,7 @@ namespace Generador_X.Controls
             }
             else
             {
-                FieldName = fType.columnName;
+                FieldName = fType.ColumName;
             }
 
             FieldType = fType;

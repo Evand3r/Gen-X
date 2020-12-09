@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Generador_X.Controls;
 using Generador_X.Controls.ModifiedControls;
 using Generador_X.Model;
+using Generador_X.Model.Enums;
 
 namespace Generador_X
 {
@@ -30,8 +31,10 @@ namespace Generador_X
             InitializeComponent();
 
             //Seleccionar formato SQL
-            CBFormatoSalida.SelectedIndex = 0;
             CreateDefaultFields();
+
+            CBFormatoSalida.DataSource = Enum.GetValues(typeof(EOutputFormat));
+            CBFormatoSalida.SelectedIndex = 0;
         }
 
         private void BtnSubir_Click(object sender, EventArgs e)
@@ -178,6 +181,7 @@ namespace Generador_X
         private void BTNGenerar_Click(object sender, EventArgs e)
         {
             HashSet<string> columnNames = new HashSet<string>();
+            List<FieldPanel> FieldPanels = new List<FieldPanel>();
             uint numFilas;
 
             foreach (Control fp in StackedPanel.Controls)
@@ -185,11 +189,13 @@ namespace Generador_X
                 if (fp is FieldPanel)
                 {
                     FieldPanel p = fp as FieldPanel;
+                    //Añadir el panel a la lista
+                    FieldPanels.Add(p);
 
                     columnNames.Add(p.TBFieldName.Text);
 
                     //Verificar valores nulos
-                    if(!uint.TryParse(p.OptionsPanel.NullsCount.Text, out numFilas))
+                    if(!uint.TryParse(p.OptionsPanel.Nulls, out numFilas))
                     {
                         ErrorHandler.ShowMessage($"El campo 'Nulos' es inválido en la columna '{p.TBFieldName.Text}'", MessageType.error);
                         return;
@@ -200,7 +206,7 @@ namespace Generador_X
             //Validar que las columnas no sean iguales.
             if (StackedPanel.Controls.Count - 1 > columnNames.Count)
             {
-                ErrorHandler.ShowMessage("Los nombres de las columnas no pueden repetirse.", MessageType.error);
+                ErrorHandler.ShowMessage("Los nombres de las columnas deben ser unicos.", MessageType.error);
                 return;
             }
 
@@ -211,8 +217,8 @@ namespace Generador_X
                 return;
             }
 
-
-
+            Generador Gen = new Generador(FieldPanels.ToArray(), (EOutputFormat) CBFormatoSalida.SelectedIndex, numFilas, PanelFormatoOpciones);
+            Gen.Generate();
         }
 
         private void BTNPreview_Click(object sender, EventArgs e)
@@ -231,8 +237,8 @@ namespace Generador_X
             {
                 case 0: //SQL
                     Label lbl = new Label_("Nombre de la Tabla");
-                    TextBox tbxTableName = new TextBox { Width = 120, Text = "GEN_X" };
-                    CheckBox ckbxCreateTable = new CheckBox { Text = "Incluir crear tabla", AutoSize = true };
+                    TextBox tbxTableName = new TextBox { Name = "TableName", Width = 120, Text = "GEN_X" };
+                    CheckBox ckbxCreateTable = new CheckBox { Name = "CreateTableCkBx", Text = "Incluir crear tabla", AutoSize = true };
                     opciones.AddRange(new Control[] { lbl, tbxTableName, ckbxCreateTable });
                     break;
                 default:
@@ -248,10 +254,10 @@ namespace Generador_X
             StackedPanel.SuspendLayout();
 
             StackedPanel.Controls.AddRange(new Control[] {
-                CreateField(FieldTypes.Types[EFieldTypes.id]),
-                CreateField(FieldTypes.Types[EFieldTypes.FirstName]),
-                CreateField(FieldTypes.Types[EFieldTypes.Date]),
-                CreateField(FieldTypes.Types[EFieldTypes.FullName]),
+                CreateField(FieldTypes.Types[EFieldType.id]),
+                CreateField(FieldTypes.Types[EFieldType.FirstName]),
+                CreateField(FieldTypes.Types[EFieldType.Date]),
+                CreateField(FieldTypes.Types[EFieldType.FullName]),
             });
             StackedPanel.ResumeLayout();
         }

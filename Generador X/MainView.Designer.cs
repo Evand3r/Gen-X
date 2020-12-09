@@ -197,14 +197,6 @@ namespace Generador_X
             // 
             this.CBFormatoSalida.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBFormatoSalida.FormattingEnabled = true;
-            this.CBFormatoSalida.Items.AddRange(new object[] {
-            "SQL",
-            "JSON",
-            "CSV",
-            "TSV",
-            "Excel",
-            "XML",
-            "Personalizado"});
             this.CBFormatoSalida.Location = new System.Drawing.Point(218, 7);
             this.CBFormatoSalida.Margin = new System.Windows.Forms.Padding(3, 7, 3, 3);
             this.CBFormatoSalida.Name = "CBFormatoSalida";
