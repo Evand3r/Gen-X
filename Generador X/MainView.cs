@@ -177,18 +177,47 @@ namespace Generador_X
 
         private void BTNGenerar_Click(object sender, EventArgs e)
         {
-            foreach (FieldPanel fp in StackedPanel.Controls)
+            HashSet<string> columnNames = new HashSet<string>();
+            uint numFilas;
+
+            foreach (Control fp in StackedPanel.Controls)
             {
                 if (fp is FieldPanel)
                 {
+                    FieldPanel p = fp as FieldPanel;
 
+                    columnNames.Add(p.TBFieldName.Text);
+
+                    //Verificar valores nulos
+                    if(!uint.TryParse(p.OptionsPanel.NullsCount.Text, out numFilas))
+                    {
+                        ErrorHandler.ShowMessage($"El campo 'Nulos' es inválido en la columna '{p.TBFieldName.Text}'", MessageType.error);
+                        return;
+                    }
                 }
             }
+
+            //Validar que las columnas no sean iguales.
+            if (StackedPanel.Controls.Count - 1 > columnNames.Count)
+            {
+                ErrorHandler.ShowMessage("Los nombres de las columnas no pueden repetirse.", MessageType.error);
+                return;
+            }
+
+            //Validar que el numero de fila es integer.
+            if (!uint.TryParse(TBNumFilas.Text, out numFilas))
+            {
+                ErrorHandler.ShowMessage("El numero de filas no es válido.", MessageType.error);
+                return;
+            }
+
+
+
         }
 
         private void BTNPreview_Click(object sender, EventArgs e)
         {
-
+            //MessageBox.Show("Estoy Aqui");
         }
 
         private void CBFormatoSalida_SelectedIndexChanged(object sender, EventArgs e)
@@ -202,7 +231,7 @@ namespace Generador_X
             {
                 case 0: //SQL
                     Label lbl = new Label_("Nombre de la Tabla");
-                    TextBox tbxTableName = new TextBox { Width = 120, Text = "GEN X" };
+                    TextBox tbxTableName = new TextBox { Width = 120, Text = "GEN_X" };
                     CheckBox ckbxCreateTable = new CheckBox { Text = "Incluir crear tabla", AutoSize = true };
                     opciones.AddRange(new Control[] { lbl, tbxTableName, ckbxCreateTable });
                     break;

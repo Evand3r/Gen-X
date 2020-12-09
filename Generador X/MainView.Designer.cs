@@ -35,11 +35,11 @@ namespace Generador_X
             System.Windows.Forms.Label label2;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.BtnGenerar = new System.Windows.Forms.Button();
             this.BTNPreview = new Generador_X.Controls.RoundedButton();
-            this.BTNGenerate = new Generador_X.Controls.RoundedButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TBNumFilas = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.CBFormatoSalida = new System.Windows.Forms.ComboBox();
             this.PanelFormatoOpciones = new System.Windows.Forms.FlowLayoutPanel();
@@ -106,13 +106,27 @@ namespace Generador_X
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.BtnGenerar);
             this.panel1.Controls.Add(this.BTNPreview);
-            this.panel1.Controls.Add(this.BTNGenerate);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 611);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(784, 50);
             this.panel1.TabIndex = 0;
+            // 
+            // BtnGenerar
+            // 
+            this.BtnGenerar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(150)))), ((int)(((byte)(170)))));
+            this.BtnGenerar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnGenerar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.BtnGenerar.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnGenerar.Location = new System.Drawing.Point(10, 11);
+            this.BtnGenerar.Name = "BtnGenerar";
+            this.BtnGenerar.Size = new System.Drawing.Size(103, 29);
+            this.BtnGenerar.TabIndex = 2;
+            this.BtnGenerar.Text = "Generar";
+            this.BtnGenerar.UseVisualStyleBackColor = false;
+            this.BtnGenerar.Click += new System.EventHandler(this.BTNGenerar_Click);
             // 
             // BTNPreview
             // 
@@ -135,32 +149,11 @@ namespace Generador_X
             this.BTNPreview.UseVisualStyleBackColor = false;
             this.BTNPreview.Click += new System.EventHandler(this.BTNPreview_Click);
             // 
-            // BTNGenerate
-            // 
-            this.BTNGenerate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(150)))), ((int)(((byte)(170)))));
-            this.BTNGenerate.BorderColor = System.Drawing.Color.Transparent;
-            this.BTNGenerate.BorderDownColor = System.Drawing.Color.Empty;
-            this.BTNGenerate.BorderDownWidth = 0F;
-            this.BTNGenerate.BorderOverColor = System.Drawing.Color.Empty;
-            this.BTNGenerate.BorderOverWidth = 10F;
-            this.BTNGenerate.BorderRadius = 10;
-            this.BTNGenerate.BorderWidth = 1.75F;
-            this.BTNGenerate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTNGenerate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.BTNGenerate.ForeColor = System.Drawing.Color.White;
-            this.BTNGenerate.Location = new System.Drawing.Point(11, 10);
-            this.BTNGenerate.Name = "BTNGenerate";
-            this.BTNGenerate.Size = new System.Drawing.Size(100, 30);
-            this.BTNGenerate.TabIndex = 0;
-            this.BTNGenerate.Text = "Generar";
-            this.BTNGenerate.UseVisualStyleBackColor = false;
-            this.BTNGenerate.Click += new System.EventHandler(this.BTNGenerar_Click);
-            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel1.Controls.Add(this.label1);
-            this.flowLayoutPanel1.Controls.Add(this.textBox1);
+            this.flowLayoutPanel1.Controls.Add(this.TBNumFilas);
             this.flowLayoutPanel1.Controls.Add(this.label3);
             this.flowLayoutPanel1.Controls.Add(this.CBFormatoSalida);
             this.flowLayoutPanel1.Controls.Add(this.PanelFormatoOpciones);
@@ -180,15 +173,15 @@ namespace Generador_X
             this.label1.TabIndex = 2;
             this.label1.Text = "No. de Filas:";
             // 
-            // textBox1
+            // TBNumFilas
             // 
-            this.textBox1.Location = new System.Drawing.Point(81, 7);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(0, 7, 3, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.textBox1.Size = new System.Drawing.Size(71, 23);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "500";
+            this.TBNumFilas.Location = new System.Drawing.Point(81, 7);
+            this.TBNumFilas.Margin = new System.Windows.Forms.Padding(0, 7, 3, 3);
+            this.TBNumFilas.Name = "TBNumFilas";
+            this.TBNumFilas.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.TBNumFilas.Size = new System.Drawing.Size(71, 23);
+            this.TBNumFilas.TabIndex = 3;
+            this.TBNumFilas.Text = "500";
             // 
             // label3
             // 
@@ -424,10 +417,9 @@ namespace Generador_X
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel StackedPanel;
-        private Controls.RoundedButton BTNGenerate;
         private Controls.RoundedButton BTNPreview;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TBNumFilas;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox CBFormatoSalida;
         private System.Windows.Forms.Panel panel2;
@@ -445,6 +437,7 @@ namespace Generador_X
         private System.Windows.Forms.Button BttnBajar;
         private System.Windows.Forms.Button BttnSubir;
         private System.Windows.Forms.FlowLayoutPanel PanelFormatoOpciones;
+        private System.Windows.Forms.Button BtnGenerar;
     }
 }
 

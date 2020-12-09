@@ -22,7 +22,8 @@ namespace Generador_X
             Application.Run(new MainView());
 
             //var text = new Ubicacion("es").CodigoPostal();
-            //var text = new Faker("es").Parse("Nombre: {{Name.FullName}}");
+            //string Daito1 = $".Between({DateTime.Now},{DateTime.Now.AddYears(-1)})";
+            //var text = new Faker("es").Parse("Nombre: {{Date" + Daito1 + "}}");
         }
     }
 }
