@@ -15,9 +15,9 @@ namespace Generador_X.Controls
         public FieldType FieldType;
         public string FieldCategory;
         public readonly TextBox TBFieldName;
+        public readonly OptionsPanel OptionsPanel;
 
         private readonly Button SelectType;
-        private readonly FlowLayoutPanel OptionsPanel;
         private readonly PictureBox RemoveSelf;
 
         public FieldPanel(FlowLayoutPanel parent, FieldType fType, string fName = "")
