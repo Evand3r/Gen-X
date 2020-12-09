@@ -9,6 +9,8 @@ namespace Generador_X.Model
 {
     class OptionsPanel : FlowLayoutPanel
     {
+        public TextBox NullsCount;
+
         public OptionsPanel(FieldType fieldType)
         {
             Anchor = AnchorStyles.Left | AnchorStyles.Right;
@@ -35,13 +37,15 @@ namespace Generador_X.Model
             }
 
             Label lblBlanks = new Label_("Nulos");
-            NumericUpDown NullsCount = new NumericUpDown
+
+            NullsCount = new TextBox
             {
                 Width = 50,
-                DecimalPlaces = 0,
                 Anchor = AnchorStyles.Right,
+                Text = "0",
+                RightToLeft = RightToLeft.Yes,
             };
-            NullsCount.Controls.RemoveAt(0);
+
             panelControls.AddRange(new Control[] { lblBlanks, NullsCount });
 
             if (panelControls.Count != 0)
