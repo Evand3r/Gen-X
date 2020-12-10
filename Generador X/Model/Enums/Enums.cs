@@ -36,21 +36,33 @@ namespace Generador_X.Model.Enums
         Basico,
         Date,
         Name,
+        Address
     }
 
 
     /// <summary>
-    /// Tipos de campo.
+    /// Nombre de tipo de campo en Bogus.
     /// </summary>
-    public enum EFieldType
+    public enum EBFieldType
     {
         //Basico
         id,
         //Date
-        Date,
+        Between,
+        Time, //(Hora) Este no existe en Bogus, pero lo pongo para usarlo como parametro.
         //Name
         FirstName,
         FullName,
+        //Address
+        //Commerce
+        //Company
+        //Finanzas
+        //Hacker
+        //Internet
+        Email,
+        ExampleEmail,
+        UserName,
+        DomainName,
     }
 
     /// <summary>
@@ -58,6 +70,14 @@ namespace Generador_X.Model.Enums
     /// </summary>
     public enum EFieldName
     {
+        //Basico
+        Numero_Fila,
+        //Nombre/Personal
+        Primer_Nombre,
+        Nombre_Completo,
+        //Fecha
+        Fecha, //Between
+        Hora, //Between (instanciado con el parametro "hora")
 
     }
 }

@@ -8,15 +8,16 @@ namespace Generador_X.Model
 {
     public class FieldTypes
     {
-        public static Dictionary<EFieldType, FieldType> Types = new Dictionary<EFieldType, FieldType>
+        public static Dictionary<EFieldName, FieldType> Types = new Dictionary<EFieldName, FieldType>
         {
             //Interno
-            {EFieldType.id, new FieldType("id", "NumeroFila", ECategory.Basico, EBCategory.Basico, "", "1\n\r2\n\r3")},
+            {EFieldName.Numero_Fila, new FieldType("id", "NumeroFila", ECategory.Basico, EBCategory.Basico, EBFieldType.id, "1\n\r2\n\r3")},
             //Date
-            {EFieldType.Date, new FieldType("fecha", "Fecha", ECategory.Fecha, EBCategory.Date, "Between", "7.1.2011\n\r15-feb-1996\n\r1 Enero 1492") },
+            {EFieldName.Fecha, new FieldType("fecha", "Fecha", ECategory.Fecha, EBCategory.Date, EBFieldType.Between, "7.1.2011\n\r15-feb-1996\n\r1 Enero 1492") },
+            {EFieldName.Hora, new FieldType("hora", "Hora", ECategory.Fecha, EBCategory.Date, EBFieldType.Time, "8:50AM\n\r23:00\n\r12:03PM") },
             //Name
-            {EFieldType.FirstName, new FieldType("primer nombre", "Primer Nombre", ECategory.Nombre, EBCategory.Name, "FirstName", "Shamil\n\rAdonis\n\rTiatira")},
-            {EFieldType.FullName, new FieldType("nombre completo", "Nombre Completo", ECategory.Nombre, EBCategory.Name, "FullName", "Shamil Carela\n\rAdonis Castillo\n\rAngelica María Rijo")},
+            {EFieldName.Primer_Nombre, new FieldType("primer_nombre", "Primer Nombre", ECategory.Nombre, EBCategory.Name, EBFieldType.FirstName, "Shamil\n\rAdonis\n\rTiatira")},
+            {EFieldName.Nombre_Completo, new FieldType("nombre_completo", "Nombre Completo", ECategory.Nombre, EBCategory.Name, EBFieldType.FullName, "Shamil Carela\n\rAdonis Castillo\n\rAngelica María Rijo")},
             //
         };
     }
@@ -27,7 +28,7 @@ namespace Generador_X.Model
         public string ColumName;
         public string SearchName;
         public ECategory SearchCategoryName;
-        public string BName;
+        public EBFieldType BName;
         public EBCategory BCategoryName;
         public string Example;
 
@@ -40,7 +41,13 @@ namespace Generador_X.Model
         /// <param name="bName">Nombre del campo para Bogus.</param>
         /// <param name="bCategoryName">Categoria del campo para Bogus.</param>
         /// <param name="example">Ejemplo para mostrar en la lista de seleccion.</param>
-        public FieldType(string name, string searchName = "", ECategory searchCategoryName = ECategory.Basico, EBCategory bCategoryName = EBCategory.Basico, string bName = "", string example = "Null")
+        public FieldType(
+            string name,
+            string searchName = "",
+            ECategory searchCategoryName = ECategory.Basico,
+            EBCategory bCategoryName = EBCategory.Basico,
+            EBFieldType bName = EBFieldType.id,
+            string example = "Null")
         {
             ColumName = name;
             SearchName = searchName;

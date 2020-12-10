@@ -37,6 +37,11 @@ namespace Generador_X
             CBFormatoSalida.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Subir campo seleccionado una posicion.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnSubir_Click(object sender, EventArgs e)
         {
             try
@@ -55,6 +60,11 @@ namespace Generador_X
             }
         }
 
+        /// <summary>
+        /// Bajar campo seleccionado una posicion.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnBajar_Click(object sender, EventArgs e)
         {
             try
@@ -96,6 +106,11 @@ namespace Generador_X
             }
         }
 
+        /// <summary>
+        /// Añadir estilos al campo seleccionado.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Style_Selected(object sender, PaintEventArgs e)
         {
             //Marcar control como seleccionado.
@@ -112,6 +127,33 @@ namespace Generador_X
             }
         }
 
+        /// <summary>
+        /// Adaptar el ancho de los campos al del flowlayout
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StackedPanel_Resize(object sender, EventArgs e)
+        {
+            //Mantener el diseño en caso de cambio de tamaño del formulario.
+            if (StackedPanel.Controls.Count > 0)
+            {
+                foreach (Control c in StackedPanel.Controls)
+                {
+                    c.Width = StackedPanel.Width - WidthOffSet;
+                }
+
+                if (FocusedControl != null)
+                {
+                    FocusedControl.Invalidate();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Añadir nuevo campo.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BttnAddField_Click(object sender, EventArgs e)
         {
             int indx;
@@ -138,23 +180,11 @@ namespace Generador_X
             }
         }
 
-        private void StackedPanel_Resize(object sender, EventArgs e)
-        {
-            //Mantener el diseño en caso de cambio de tamaño del formulario.
-            if (StackedPanel.Controls.Count > 0)
-            {
-                foreach (Control c in StackedPanel.Controls)
-                {
-                    c.Width = StackedPanel.Width - WidthOffSet;
-                }
-
-                if (FocusedControl != null)
-                {
-                    FocusedControl.Invalidate();
-                }
-            }
-        }
-
+        /// <summary>
+        /// Cambiar tipo de campo del campo seleccionado.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void ChangeField(object sender, EventArgs e)
         {
             int indx;
@@ -178,6 +208,11 @@ namespace Generador_X
             }
         }
 
+        /// <summary>
+        /// Generar datos de las columnas.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BTNGenerar_Click(object sender, EventArgs e)
         {
             HashSet<string> columnNames = new HashSet<string>();
@@ -210,8 +245,8 @@ namespace Generador_X
                 return;
             }
 
-            //Validar que el numero de fila es integer.
-            if (!uint.TryParse(TBNumFilas.Text, out numFilas))
+            //Validar que el numero de fila es un entero.
+            if (!uint.TryParse(TBNumFilas.Text, out numFilas) && numFilas >= 1)
             {
                 ErrorHandler.ShowMessage("El numero de filas no es válido.", MessageType.error);
                 return;
@@ -249,15 +284,18 @@ namespace Generador_X
             PanelFormatoOpciones.ResumeLayout();
         }
 
+        /// <summary>
+        /// Crear los campos por defecto al iniciar el programa.
+        /// </summary>
         private void CreateDefaultFields()
         {
             StackedPanel.SuspendLayout();
 
             StackedPanel.Controls.AddRange(new Control[] {
-                CreateField(FieldTypes.Types[EFieldType.id]),
-                CreateField(FieldTypes.Types[EFieldType.FirstName]),
-                CreateField(FieldTypes.Types[EFieldType.Date]),
-                CreateField(FieldTypes.Types[EFieldType.FullName]),
+                CreateField(FieldTypes.Types[EFieldName.Numero_Fila]),
+                CreateField(FieldTypes.Types[EFieldName.Primer_Nombre]),
+                CreateField(FieldTypes.Types[EFieldName.Fecha]),
+                CreateField(FieldTypes.Types[EFieldName.Nombre_Completo]),
             });
             StackedPanel.ResumeLayout();
         }

@@ -23,6 +23,8 @@ namespace Generador_X.Controls
 
         public FieldPanel(FlowLayoutPanel parent, FieldType fType, string fName = "")
         {
+            //En caso de que se modifique el tipo de campo, conservar el
+            //nombre que tenia anteriormente.
             if (fName != "")
             {
                 FieldName = fName;

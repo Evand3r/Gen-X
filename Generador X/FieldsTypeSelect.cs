@@ -21,7 +21,7 @@ namespace Generador_X
             InitializeComponent();
 
             //Listar los tipos de campos.
-            foreach(KeyValuePair<EFieldType, FieldType> aFieldType in FieldTypes.Types)
+            foreach(KeyValuePair<EFieldName, FieldType> aFieldType in FieldTypes.Types)
             {
                 FlowPanelFieldSelect.Controls.Add(new FieldSelect(aFieldType.Value, FieldSelect_Click));
             };
@@ -30,9 +30,14 @@ namespace Generador_X
 
         private void SearchTB_TextChanged(object sender, EventArgs e)
         {
-            //Filter fields
+            //TODO: Filter fields
         }
 
+        /// <summary>
+        /// Evento clic al elegir el tipo de campo a instanciar.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FieldSelect_Click(object sender, EventArgs e)
         {
             Type = ((sender as FieldSelect).Tag as FieldType);

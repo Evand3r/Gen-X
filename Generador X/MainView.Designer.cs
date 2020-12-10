@@ -111,7 +111,7 @@ namespace Generador_X
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 611);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(784, 50);
+            this.panel1.Size = new System.Drawing.Size(884, 50);
             this.panel1.TabIndex = 0;
             // 
             // BtnGenerar
@@ -160,7 +160,7 @@ namespace Generador_X
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 571);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(784, 40);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(884, 40);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // label1
@@ -220,7 +220,7 @@ namespace Generador_X
             this.StackedPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.StackedPanel.Location = new System.Drawing.Point(0, 74);
             this.StackedPanel.Name = "StackedPanel";
-            this.StackedPanel.Size = new System.Drawing.Size(784, 497);
+            this.StackedPanel.Size = new System.Drawing.Size(884, 497);
             this.StackedPanel.TabIndex = 0;
             this.StackedPanel.WrapContents = false;
             this.StackedPanel.Resize += new System.EventHandler(this.StackedPanel_Resize);
@@ -305,7 +305,7 @@ namespace Generador_X
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 24);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(784, 50);
+            this.panel2.Size = new System.Drawing.Size(884, 50);
             this.panel2.TabIndex = 1;
             // 
             // BttnAddField
@@ -314,7 +314,7 @@ namespace Generador_X
             this.BttnAddField.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BttnAddField.BackgroundImage")));
             this.BttnAddField.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BttnAddField.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BttnAddField.Location = new System.Drawing.Point(735, 0);
+            this.BttnAddField.Location = new System.Drawing.Point(835, 0);
             this.BttnAddField.Margin = new System.Windows.Forms.Padding(5);
             this.BttnAddField.Name = "BttnAddField";
             this.BttnAddField.Size = new System.Drawing.Size(49, 50);
@@ -328,7 +328,7 @@ namespace Generador_X
             this.panel4.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.panel4.Controls.Add(this.BttnBajar);
             this.panel4.Controls.Add(this.BttnSubir);
-            this.panel4.Location = new System.Drawing.Point(646, 3);
+            this.panel4.Location = new System.Drawing.Point(746, 3);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(81, 41);
             this.panel4.TabIndex = 4;
@@ -361,7 +361,7 @@ namespace Generador_X
             // 
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(784, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(884, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -377,13 +377,13 @@ namespace Generador_X
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 661);
+            this.ClientSize = new System.Drawing.Size(884, 661);
             this.Controls.Add(this.StackedPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
-            this.MinimumSize = new System.Drawing.Size(800, 700);
+            this.MinimumSize = new System.Drawing.Size(900, 700);
             this.Name = "MainView";
             this.Text = "Gen X";
             this.panel1.ResumeLayout(false);
