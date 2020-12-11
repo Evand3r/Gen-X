@@ -21,20 +21,30 @@ namespace Generador_X.Controls
         {
             Anchor = AnchorStyles.Left | AnchorStyles.Right;
             Location = new Point(384, 5);
-            Size = new Size(339, 38);
             //BorderStyle = BorderStyle.FixedSingle;
             Padding = new Padding(4);
+            WrapContents = false;
+            Dock = DockStyle.Fill;
 
             ftype = fieldType;
 
             SuspendLayout();
+            //Crer los controles correspondientes.
             Options = CreateOption(ftype.BName);
+            //Añadir el contador de nulos.
             Nulls = Options.NullsCount.Text;
+            //Añadir los controles al panel.
             Controls.AddRange(Options.panelControls.ToArray());
 
             ResumeLayout(false);
         }
 
+        /// <summary>
+        /// Crea el contenedor de opciones que trae el metodo Generate 
+        /// y los controles de opciones.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         private BaseOptionsType CreateOption(EBFieldType type)
         {
             switch (type)

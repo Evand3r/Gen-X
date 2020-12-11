@@ -12,19 +12,26 @@ using System.Windows.Forms;
 
 namespace Generador_X.Model
 {
+    /// <summary>
+    /// Tipo base de panel de opciones.
+    /// </summary>
     class BaseOptionsType : IOptions<string[]>
     {
-        public string value;
-        public Faker fkr = new Faker();
-        public Label lblBlanks = new Label_("Nulos");
+        //TODO: Añadir soporte para otros idiomas
+        public Faker fkr = new Faker("es");
+        public Label lblBlanks = new Label_("Nulos") { Margin = new Padding(0, 6, 0, 6) };
+        /// <summary>
+        /// Campo para el porcentaje de nulos de una columna.
+        /// </summary>
         public readonly TextBox NullsCount = new TextBox
         {
-            Width = 50,
+            Width = 23,
             Anchor = AnchorStyles.Right,
             Text = "0",
             RightToLeft = RightToLeft.Yes,
             MaxLength = 2,
         };
+        public Label lblPrcnt = new Label_("%") { Margin = new Padding(0, 6, 0, 6) };
         public List<Control> panelControls = new List<Control>();
 
         //Cantidad de campos nulos, tomar de NullsCount TextBox
@@ -34,14 +41,14 @@ namespace Generador_X.Model
             {
                 _ = int.TryParse(NullsCount.Text, out int tmp);
                 NullsCount.Text = tmp.ToString();
-                return (tmp % 99) / 100f;
+                return (tmp % 100) / 100f;
             }
 
         }
 
         public BaseOptionsType()
         {
-            panelControls.AddRange(new Control[] { lblBlanks, NullsCount });
+            panelControls.AddRange(new Control[] { lblBlanks, NullsCount, lblPrcnt });
         }
 
         public virtual string[] Generate(int d)
@@ -50,12 +57,14 @@ namespace Generador_X.Model
         }
     }
 
+    /// <summary>
+    /// Opciones para tipo de campo numero de linea.
+    /// </summary>
     class RowNumberOptionsType : BaseOptionsType
     {
-        int Value = 1;
-
         public override string[] Generate(int d)
         {
+            int Value = 1;
             int?[] a = new int?[d];
 
             if (Nulls == 0)
@@ -65,10 +74,9 @@ namespace Generador_X.Model
             }
             else
             {
-
                 for (int b = 0; b < a.Length; b++)
                 {
-                    if (fkr.PickRandom(true, false).OrDefault(fkr, Nulls / 100, false))
+                    if (fkr.PickRandom(true, false).OrDefault(fkr, Nulls, false))
                     {
                         a[b] = Value;
                     }
@@ -81,6 +89,10 @@ namespace Generador_X.Model
         }
     }
 
+    /// <summary>
+    /// Opciones de Nombre que pueden variar con el 
+    /// parametro de tipo de campo en el constructor.
+    /// </summary>
     class OptionsName : BaseOptionsType
     {
         readonly EBFieldType FieldType;
@@ -99,6 +111,9 @@ namespace Generador_X.Model
 
     }
 
+    /// <summary>
+    /// Opciones de fecha u hora.
+    /// </summary>
     class OptionsDateType : BaseOptionsType
     {
         DateTimePick_ DTFrom;

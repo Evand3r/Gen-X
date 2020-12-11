@@ -23,6 +23,11 @@ namespace Generador_X.Controls
 
         public FieldPanel(FlowLayoutPanel parent, FieldType fType, string fName = "")
         {
+            MainView mainview = parent.Parent as MainView;
+            Size = new Size(parent.Width - 10, 50);
+            BorderStyle = BorderStyle.FixedSingle;
+            Padding = new Padding(4);
+
             //En caso de que se modifique el tipo de campo, conservar el
             //nombre que tenia anteriormente.
             if (fName != "")
@@ -34,12 +39,17 @@ namespace Generador_X.Controls
                 FieldName = fType.ColumName;
             }
 
+            Panel ConstantPanel = new Panel
+            {
+                MaximumSize = new Size(370, 42),
+                MinimumSize = new Size(370, 0),
+                Dock = DockStyle.Left,
+                Padding = new Padding(0),
+            };
+
             FieldType = fType;
             FieldCategory = fType.BCategoryName;
 
-            Size = new Size(parent.Width - 10, 50);
-            MinimumSize = new Size(775, 50);
-            BorderStyle = BorderStyle.FixedSingle;
 
             ResourceManager resources = Resources.ResourceManager;
 
@@ -47,7 +57,7 @@ namespace Generador_X.Controls
             TBFieldName = new TextBox
             {
                 Width = 170,
-                Location = new Point(15, 15),
+                Location = new Point(10, 9),
                 Text = FieldName,
             };
 
@@ -55,7 +65,7 @@ namespace Generador_X.Controls
             SelectType = new Button
             {
                 Cursor = Cursors.Hand,
-                Location = new Point(215, 15),
+                Location = new Point(211, 8),
                 Text = fType.SearchName,
                 TextAlign = ContentAlignment.MiddleLeft,
                 Image = (Bitmap)resources.GetObject("Open Folder_50px"),
@@ -64,10 +74,15 @@ namespace Generador_X.Controls
             };
 
             //Añadir evento de cambiar tipo de campo.
-            SelectType.Click += new EventHandler((parent.Parent as MainView).ChangeField);
+            SelectType.Click += new EventHandler(mainview.ChangeField);
+            ConstantPanel.Controls.AddRange(new Control[] { TBFieldName, SelectType });
 
             //Panel de opciones del campo.
             OptionsPanel = new OptionsPanel(FieldType);
+
+            //Añadir evento para que se seleccione el campo
+            ConstantPanel.Click += new EventHandler((object o, EventArgs e) => OnClick(e));
+            OptionsPanel.Click += new EventHandler((object o, EventArgs e) => OnClick(e));
 
             //Boton de elimiar el campo.
             RemoveSelf = new PictureBox
@@ -79,16 +94,13 @@ namespace Generador_X.Controls
                 BackgroundImageLayout = ImageLayout.Zoom,
                 BackgroundImage = (Bitmap)resources.GetObject("Cancel_48px"),
                 Margin = new Padding(5),
-                Location = new Point(parent.Width - 53, 5)
+                Location = new Point(parent.Width - 53, 5),
+                Dock = DockStyle.Right,
             };
 
             RemoveSelf.Click += new EventHandler(Remove);
 
-            //Añadir en este orden.
-            Controls.Add(RemoveSelf);
-            Controls.Add(OptionsPanel);
-            Controls.Add(SelectType);
-            Controls.Add(TBFieldName);
+            Controls.AddRange(new Control[] { OptionsPanel, RemoveSelf, ConstantPanel, });
         }
 
         /// <summary>
