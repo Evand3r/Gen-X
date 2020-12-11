@@ -65,8 +65,9 @@ namespace Generador_X.Controls
                 //case EBFieldType.DomainName:
                 //    break;
                 case EBFieldType.id:
-                default:
                     return new RowNumberOptionsType();
+                default:
+                    return new BaseOptionsType(ftype.BCategoryName, ftype.BName);
             }
         }
 

@@ -19,7 +19,12 @@ namespace Generador_X
         /// <summary>
         /// Campo seleccionado actuallmente.
         /// </summary>
-        Control FocusedControl = null;
+        private Control FocusedControl = null;
+        /// <summary>
+        /// Lista de campos.
+        /// </summary>
+        private List<FieldPanel> FieldPanels = new List<FieldPanel>();
+        private uint NumFilas;
 
         /// <summary>
         /// Tamaño de los campos
@@ -120,7 +125,7 @@ namespace Generador_X
                 ButtonBorderStyle bbs = ButtonBorderStyle.Solid;
                 int ancho = 4;
 
-                ControlPaint.DrawBorder(e.Graphics, this.FocusedControl.ClientRectangle, col, ancho, bbs,
+                ControlPaint.DrawBorder(e.Graphics, FocusedControl.ClientRectangle, col, ancho, bbs,
                                                                                 col, ancho, bbs,
                                                                                 col, ancho, bbs,
                                                                                 col, ancho, bbs);
@@ -188,7 +193,7 @@ namespace Generador_X
         public void ChangeField(object sender, EventArgs e)
         {
             int indx;
-            FieldPanel prevField = (sender as Button).Parent as FieldPanel;
+            FieldPanel prevField = ((sender as Button).Parent as Panel).Parent as FieldPanel;
 
             FieldsTypeSelect fts = new FieldsTypeSelect();
             var result = fts.ShowDialog();
@@ -197,7 +202,7 @@ namespace Generador_X
             {
                 StackedPanel.SuspendLayout();
 
-                indx = StackedPanel.Controls.IndexOf((sender as Button).Parent);
+                indx = StackedPanel.Controls.IndexOf(prevField);
 
                 FieldPanel p = CreateField(fts.Type, prevField.TBFieldName.Text);
 
@@ -215,50 +220,21 @@ namespace Generador_X
         /// <param name="e"></param>
         private void BTNGenerar_Click(object sender, EventArgs e)
         {
-            HashSet<string> columnNames = new HashSet<string>();
-            List<FieldPanel> FieldPanels = new List<FieldPanel>();
-            uint numFilas;
 
-            foreach (Control fp in StackedPanel.Controls)
+            if (ValidateFields())
             {
-                if (fp is FieldPanel)
-                {
-                    FieldPanel p = fp as FieldPanel;
-                    //Añadir el panel a la lista
-                    FieldPanels.Add(p);
-
-                    columnNames.Add(p.TBFieldName.Text);
-
-                    //Verificar valores nulos
-                    if(!uint.TryParse(p.OptionsPanel.Nulls, out numFilas))
-                    {
-                        ErrorHandler.ShowMessage($"El campo 'Nulos' es inválido en la columna '{p.TBFieldName.Text}'", MessageType.error);
-                        return;
-                    }
-                }
+                Generador Gen = new Generador(FieldPanels.ToArray(), (EOutputFormat)CBFormatoSalida.SelectedIndex, NumFilas, PanelFormatoOpciones);
+                Gen.Generate();
             }
-
-            //Validar que las columnas no sean iguales.
-            if (StackedPanel.Controls.Count - 1 > columnNames.Count)
-            {
-                ErrorHandler.ShowMessage("Los nombres de las columnas deben ser unicos.", MessageType.error);
-                return;
-            }
-
-            //Validar que el numero de fila es un entero.
-            if (!uint.TryParse(TBNumFilas.Text, out numFilas) && numFilas >= 1)
-            {
-                ErrorHandler.ShowMessage("El numero de filas no es válido.", MessageType.error);
-                return;
-            }
-
-            Generador Gen = new Generador(FieldPanels.ToArray(), (EOutputFormat) CBFormatoSalida.SelectedIndex, numFilas, PanelFormatoOpciones);
-            Gen.Generate();
         }
 
         private void BTNPreview_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show("Estoy Aqui");
+            if (ValidateFields())
+            {
+                Generador Gen = new Generador(FieldPanels.ToArray(), (EOutputFormat)CBFormatoSalida.SelectedIndex, NumFilas, PanelFormatoOpciones);
+                Gen.Generate(true);
+            }
         }
 
         private void CBFormatoSalida_SelectedIndexChanged(object sender, EventArgs e)
@@ -310,6 +286,52 @@ namespace Generador_X
             p.MouseDoubleClick += new MouseEventHandler((object o, MouseEventArgs e) => { FocusedControl = null; p.Dispose(); });
 
             return p;
+        }
+
+        private bool ValidateFields()
+        {
+            HashSet<string> columnNames = new HashSet<string>();
+            FieldPanels.Clear();
+            //TODO: pasar de 2 a 1 una vez terminado la fase de diseño de la interfaz.
+            if(StackedPanel.Controls.Count < 2)
+            {
+                return false;
+            }
+
+            foreach (Control fp in StackedPanel.Controls)
+            {
+                if (fp is FieldPanel)
+                {
+                    FieldPanel p = fp as FieldPanel;
+                    //Añadir el panel a la lista
+                    FieldPanels.Add(p);
+
+                    columnNames.Add(p.TBFieldName.Text);
+
+                    //Verificar valores nulos
+                    if (!uint.TryParse(p.OptionsPanel.Nulls, out NumFilas))
+                    {
+                        ErrorHandler.ShowMessage($"El campo 'Nulos' es inválido en la columna '{p.TBFieldName.Text}'", MessageType.error);
+                        return false;
+                    }
+                }
+            }
+
+            //Validar que las columnas no sean iguales.
+            if (StackedPanel.Controls.Count - 1 > columnNames.Count)
+            {
+                ErrorHandler.ShowMessage("Los nombres de las columnas deben ser unicos.", MessageType.error);
+                return false;
+            }
+
+            //Validar que el numero de fila es un entero.
+            if (!uint.TryParse(TBNumFilas.Text, out NumFilas) && NumFilas >= 1)
+            {
+                ErrorHandler.ShowMessage("El numero de filas no es válido.", MessageType.error);
+                return false;
+            }
+
+            return true;
         }
     }
 }

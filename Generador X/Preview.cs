@@ -14,5 +14,11 @@ namespace Generador_X
         {
             InitializeComponent();
         }
+
+        public PreviewForm(string Result)
+        {
+            InitializeComponent();
+            TBExampleText.Text = Result;
+        }
     }
 }

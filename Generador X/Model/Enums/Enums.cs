@@ -26,6 +26,8 @@ namespace Generador_X.Model.Enums
         Basico,
         Nombre,
         Fecha,
+        Direccion,
+
     }
 
     /// <summary>
@@ -53,6 +55,7 @@ namespace Generador_X.Model.Enums
         //Name
         FirstName,
         FullName,
+        LastName,
         //Address
         //Commerce
         //Company
@@ -78,6 +81,17 @@ namespace Generador_X.Model.Enums
         //Fecha
         Fecha, //Between
         Hora, //Between (instanciado con el parametro "hora")
-
+        Apellido,
+        //Direccion
+        Ciudad,
+        Provincia,
+        Pais,
+        Direccion_Completa,
+        Direccion_Calle,
+        Prefijo_Ciudad,
+        Prefijo_Pais,
+        Nombre_Calle,
+        Latitud,
+        Longitud,
     }
 }

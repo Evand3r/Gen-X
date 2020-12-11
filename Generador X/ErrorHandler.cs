@@ -7,12 +7,30 @@ namespace Generador_X
 {
     class ErrorHandler
     {
-        public static void ShowMessage(string message, MessageType type)
+        public static void ShowMessage(string message, MessageType type = MessageType.error)
         {
-            if(type == MessageType.error)
+            MessageBoxIcon icon = MessageBoxIcon.None;
+            string Title = "";
+
+            switch (type)
             {
-                MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                case MessageType.error:
+                    icon = MessageBoxIcon.Error;
+                    Title = "Error";
+                    break;
+                case MessageType.warning:
+                    icon = MessageBoxIcon.Warning;
+                    Title = "Advertencia";
+                    break;
+                case MessageType.info:
+                    icon = MessageBoxIcon.Information;
+                    Title = "Info";
+                    break;
+                default:
+                    break;
             }
+
+                MessageBox.Show(message, Title, MessageBoxButtons.OK, icon);
         }
     }
 

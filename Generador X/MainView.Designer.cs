@@ -35,8 +35,8 @@ namespace Generador_X
             System.Windows.Forms.Label label2;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.BTNPreview = new System.Windows.Forms.Button();
             this.BtnGenerar = new System.Windows.Forms.Button();
-            this.BTNPreview = new Generador_X.Controls.RoundedButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.TBNumFilas = new System.Windows.Forms.TextBox();
@@ -46,10 +46,12 @@ namespace Generador_X
             this.StackedPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.BttnAddField = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -66,8 +68,8 @@ namespace Generador_X
             this.StackedPanel.SuspendLayout();
             this.panel3.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel6.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BttnAddField)).BeginInit();
             this.panel4.SuspendLayout();
@@ -106,48 +108,47 @@ namespace Generador_X
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.BtnGenerar);
             this.panel1.Controls.Add(this.BTNPreview);
+            this.panel1.Controls.Add(this.BtnGenerar);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 611);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(884, 50);
             this.panel1.TabIndex = 0;
             // 
+            // BTNPreview
+            // 
+            this.BTNPreview.BackColor = System.Drawing.Color.White;
+            this.BTNPreview.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.BTNPreview.FlatAppearance.BorderSize = 2;
+            this.BTNPreview.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro;
+            this.BTNPreview.FlatAppearance.MouseOverBackColor = System.Drawing.Color.WhiteSmoke;
+            this.BTNPreview.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTNPreview.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.BTNPreview.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.BTNPreview.Location = new System.Drawing.Point(133, 10);
+            this.BTNPreview.Name = "BTNPreview";
+            this.BTNPreview.Size = new System.Drawing.Size(103, 29);
+            this.BTNPreview.TabIndex = 2;
+            this.BTNPreview.Text = "Vista previa";
+            this.BTNPreview.UseVisualStyleBackColor = false;
+            this.BTNPreview.Click += new System.EventHandler(this.BTNPreview_Click);
+            // 
             // BtnGenerar
             // 
             this.BtnGenerar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(150)))), ((int)(((byte)(170)))));
+            this.BtnGenerar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.BtnGenerar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Green;
             this.BtnGenerar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnGenerar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.BtnGenerar.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.BtnGenerar.Location = new System.Drawing.Point(10, 11);
+            this.BtnGenerar.Location = new System.Drawing.Point(13, 10);
             this.BtnGenerar.Name = "BtnGenerar";
             this.BtnGenerar.Size = new System.Drawing.Size(103, 29);
             this.BtnGenerar.TabIndex = 2;
             this.BtnGenerar.Text = "Generar";
             this.BtnGenerar.UseVisualStyleBackColor = false;
             this.BtnGenerar.Click += new System.EventHandler(this.BTNGenerar_Click);
-            // 
-            // BTNPreview
-            // 
-            this.BTNPreview.BackColor = System.Drawing.Color.White;
-            this.BTNPreview.BorderColor = System.Drawing.Color.DimGray;
-            this.BTNPreview.BorderDownColor = System.Drawing.Color.Empty;
-            this.BTNPreview.BorderDownWidth = 0F;
-            this.BTNPreview.BorderOverColor = System.Drawing.Color.Empty;
-            this.BTNPreview.BorderOverWidth = 10F;
-            this.BTNPreview.BorderRadius = 10;
-            this.BTNPreview.BorderWidth = 1.75F;
-            this.BTNPreview.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BTNPreview.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.BTNPreview.ForeColor = System.Drawing.Color.DimGray;
-            this.BTNPreview.Location = new System.Drawing.Point(125, 10);
-            this.BTNPreview.Name = "BTNPreview";
-            this.BTNPreview.Size = new System.Drawing.Size(100, 30);
-            this.BTNPreview.TabIndex = 1;
-            this.BTNPreview.Text = "Vista previa";
-            this.BTNPreview.UseVisualStyleBackColor = false;
-            this.BTNPreview.Click += new System.EventHandler(this.BTNPreview_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -230,11 +231,11 @@ namespace Generador_X
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.flowLayoutPanel2);
             this.panel3.Controls.Add(this.pictureBox1);
-            this.panel3.Controls.Add(this.button1);
-            this.panel3.Controls.Add(this.textBox2);
+            this.panel3.Controls.Add(this.panel6);
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.MinimumSize = new System.Drawing.Size(775, 2);
             this.panel3.Name = "panel3";
+            this.panel3.Padding = new System.Windows.Forms.Padding(4);
             this.panel3.Size = new System.Drawing.Size(775, 50);
             this.panel3.TabIndex = 0;
             this.panel3.Visible = false;
@@ -242,58 +243,79 @@ namespace Generador_X
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel2.Controls.Add(this.numericUpDown1);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(384, 4);
+            this.flowLayoutPanel2.Controls.Add(this.textBox1);
+            this.flowLayoutPanel2.Controls.Add(this.label6);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(354, 4);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Padding = new System.Windows.Forms.Padding(6);
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(339, 40);
-            this.flowLayoutPanel2.TabIndex = 6;
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(375, 40);
+            this.flowLayoutPanel2.TabIndex = 9;
             this.flowLayoutPanel2.WrapContents = false;
             // 
-            // numericUpDown1
+            // textBox1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(9, 9);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(50, 23);
-            this.numericUpDown1.TabIndex = 0;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            13,
-            0,
-            0,
-            0});
+            this.textBox1.Location = new System.Drawing.Point(9, 9);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(23, 23);
+            this.textBox1.TabIndex = 0;
+            this.textBox1.Text = "99";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(35, 13);
+            this.label6.Margin = new System.Windows.Forms.Padding(0, 7, 3, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(17, 15);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "%";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Location = new System.Drawing.Point(730, 3);
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pictureBox1.Location = new System.Drawing.Point(729, 4);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(5);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(40, 43);
-            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             this.toolTip1.SetToolTip(this.pictureBox1, "Añadir campo.");
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.textBox2);
+            this.panel6.Controls.Add(this.button1);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel6.Location = new System.Drawing.Point(4, 4);
+            this.panel6.MaximumSize = new System.Drawing.Size(370, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(350, 40);
+            this.panel6.TabIndex = 7;
+            this.panel6.Visible = false;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(10, 9);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(170, 23);
+            this.textBox2.TabIndex = 3;
             // 
             // button1
             // 
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.Location = new System.Drawing.Point(215, 15);
+            this.button1.Location = new System.Drawing.Point(211, 8);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(120, 23);
-            this.button1.TabIndex = 1;
+            this.button1.TabIndex = 2;
             this.button1.Text = "button1";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(15, 15);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(170, 23);
-            this.textBox2.TabIndex = 0;
             // 
             // panel2
             // 
@@ -391,10 +413,11 @@ namespace Generador_X
             this.flowLayoutPanel1.PerformLayout();
             this.StackedPanel.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.flowLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BttnAddField)).EndInit();
@@ -409,7 +432,6 @@ namespace Generador_X
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel StackedPanel;
-        private Controls.RoundedButton BTNPreview;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox TBNumFilas;
         private System.Windows.Forms.Label label3;
@@ -420,16 +442,19 @@ namespace Generador_X
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button BttnBajar;
         private System.Windows.Forms.Button BttnSubir;
         private System.Windows.Forms.FlowLayoutPanel PanelFormatoOpciones;
         private System.Windows.Forms.Button BtnGenerar;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button BTNPreview;
     }
 }
 

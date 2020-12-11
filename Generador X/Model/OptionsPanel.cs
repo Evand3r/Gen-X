@@ -12,10 +12,11 @@ using System.Windows.Forms;
 
 namespace Generador_X.Model
 {
+#nullable enable
     /// <summary>
     /// Tipo base de panel de opciones.
     /// </summary>
-    class BaseOptionsType : IOptions<string[]>
+    class BaseOptionsType : IOptions<string?[]>
     {
         //TODO: Añadir soporte para otros idiomas
         public Faker fkr = new Faker("es");
@@ -33,6 +34,8 @@ namespace Generador_X.Model
         };
         public Label lblPrcnt = new Label_("%") { Margin = new Padding(0, 6, 0, 6) };
         public List<Control> panelControls = new List<Control>();
+        private EBCategory? EBCat;
+        private EBFieldType? EBFld;
 
         //Cantidad de campos nulos, tomar de NullsCount TextBox
         public float Nulls
@@ -51,9 +54,36 @@ namespace Generador_X.Model
             panelControls.AddRange(new Control[] { lblBlanks, NullsCount, lblPrcnt });
         }
 
-        public virtual string[] Generate(int d)
+        public BaseOptionsType(EBCategory ebcat, EBFieldType ebfld)
         {
-            return Enumerable.Repeat(string.Empty, d).ToArray();
+            panelControls.AddRange(new Control[] { lblBlanks, NullsCount, lblPrcnt });
+            EBCat = ebcat;
+            EBFld = ebfld;
+        }
+
+        public virtual string?[] Generate(int d)
+        {
+            string?[] value = new string?[] { };
+            try
+            {
+                if (EBCat != null && EBFld != null)
+                {
+                    value = Enumerable.Range(1, d)
+                        .Select(_ => fkr.Parse("{{" + $"{(EBCategory)EBCat }.{(EBFieldType)EBFld}" + "}}").OrNull(fkr, Nulls)?.ToString())
+                        .ToArray();
+                }
+            }
+            catch (Exception e)
+            {
+                ErrorHandler.ShowMessage("Ha ocurrido un error inesperado", MessageType.error);
+            }
+
+            if(value.Length != d)
+            {
+                value = Enumerable.Repeat(string.Empty, d).ToArray();
+            }
+
+            return value;
         }
     }
 
@@ -62,7 +92,7 @@ namespace Generador_X.Model
     /// </summary>
     class RowNumberOptionsType : BaseOptionsType
     {
-        public override string[] Generate(int d)
+        public override string?[] Generate(int d)
         {
             int Value = 1;
             int?[] a = new int?[d];
@@ -105,7 +135,7 @@ namespace Generador_X.Model
         public override string?[] Generate(int d)
         {
             return Enumerable.Range(1, d)
-                .Select(_ => fkr.Parse("{{Name." + $"{(EBFieldType)FieldType}" + "}}").OrNull(fkr, Nulls))
+                .Select(_ => fkr.Parse("{{Name." + $"{FieldType}" + "}}").OrNull(fkr, Nulls))
                 .ToArray();
         }
 
@@ -171,6 +201,7 @@ namespace Generador_X.Model
                 .ToArray();
         }
     }
+#nullable disable
 
     public interface IOptions<T>
     {
