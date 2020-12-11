@@ -276,6 +276,12 @@ namespace Generador_X
             StackedPanel.ResumeLayout();
         }
 
+        /// <summary>
+        /// Crear campo con el texto de nombre.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         private FieldPanel CreateField(FieldType type, string name = "")
         {
             FieldPanel p = new FieldPanel(StackedPanel, type, name);
@@ -288,6 +294,10 @@ namespace Generador_X
             return p;
         }
 
+        /// <summary>
+        /// Validar campos listados.
+        /// </summary>
+        /// <returns></returns>
         private bool ValidateFields()
         {
             HashSet<string> columnNames = new HashSet<string>();
@@ -317,7 +327,7 @@ namespace Generador_X
                 }
             }
 
-            //Validar que las columnas no sean iguales.
+            //Validar que los nombres de las columnas no sean iguales.
             if (StackedPanel.Controls.Count - 1 > columnNames.Count)
             {
                 ErrorHandler.ShowMessage("Los nombres de las columnas deben ser unicos.", MessageType.error);

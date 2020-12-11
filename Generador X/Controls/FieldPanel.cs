@@ -12,7 +12,11 @@ namespace Generador_X.Controls
 {
     class FieldPanel : Panel, IFieldBase
     {
-        public string FieldName;
+        public string FieldName
+        {
+            get { return TBFieldName.Text; }
+            set { TBFieldName.Text = value; }
+        }
         public FieldType FieldType;
         public EBCategory FieldCategory;
         public readonly TextBox TBFieldName;
@@ -27,17 +31,6 @@ namespace Generador_X.Controls
             Size = new Size(parent.Width - 10, 50);
             BorderStyle = BorderStyle.FixedSingle;
             Padding = new Padding(4);
-
-            //En caso de que se modifique el tipo de campo, conservar el
-            //nombre que tenia anteriormente.
-            if (fName != "")
-            {
-                FieldName = fName;
-            }
-            else
-            {
-                FieldName = fType.ColumName;
-            }
 
             Panel ConstantPanel = new Panel
             {
@@ -58,8 +51,18 @@ namespace Generador_X.Controls
             {
                 Width = 170,
                 Location = new Point(10, 9),
-                Text = FieldName,
             };
+
+            //En caso de que se modifique el tipo de campo, conservar el
+            //nombre que tenia anteriormente.
+            if (fName != "")
+            {
+                FieldName = fName;
+            }
+            else
+            {
+                FieldName = fType.ColumName;
+            }
 
             //Boton para seleccionar el tipo de campo.
             SelectType = new Button

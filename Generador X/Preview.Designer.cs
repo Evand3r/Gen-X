@@ -40,8 +40,10 @@ namespace Generador_X
             this.TBExampleText.Multiline = true;
             this.TBExampleText.Name = "TBExampleText";
             this.TBExampleText.ReadOnly = true;
+            this.TBExampleText.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.TBExampleText.Size = new System.Drawing.Size(784, 461);
             this.TBExampleText.TabIndex = 2;
+            this.TBExampleText.WordWrap = false;
             // 
             // PreviewForm
             // 

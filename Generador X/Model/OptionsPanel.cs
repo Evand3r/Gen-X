@@ -69,7 +69,7 @@ namespace Generador_X.Model
                 if (EBCat != null && EBFld != null)
                 {
                     value = Enumerable.Range(1, d)
-                        .Select(_ => fkr.Parse("{{" + $"{(EBCategory)EBCat }.{(EBFieldType)EBFld}" + "}}").OrNull(fkr, Nulls)?.ToString())
+                        .Select(_ => fkr.Parse("{{'" + $"{(EBCategory)EBCat }.{(EBFieldType)EBFld}" + "'}}").OrNull(fkr, Nulls)?.ToString())
                         .ToArray();
                 }
             }
@@ -135,7 +135,7 @@ namespace Generador_X.Model
         public override string?[] Generate(int d)
         {
             return Enumerable.Range(1, d)
-                .Select(_ => fkr.Parse("{{Name." + $"{FieldType}" + "}}").OrNull(fkr, Nulls))
+                .Select(_ => fkr.Parse("'{{Name." + $"{FieldType}" + "}}'").OrNull(fkr, Nulls))
                 .ToArray();
         }
 
@@ -197,7 +197,7 @@ namespace Generador_X.Model
         public override string[] Generate(int d)
         {
             return Enumerable.Range(1, d)
-                .Select(_ => fkr.Date.Between(DTFrom.Value, DTTo.Value).ToString(SelectedFormat).OrNull(fkr, Nulls))
+                .Select(_ => "'" + fkr.Date.Between(DTFrom.Value, DTTo.Value).ToString(SelectedFormat).OrNull(fkr, Nulls) + "'")
                 .ToArray();
         }
     }
