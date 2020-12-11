@@ -8,6 +8,11 @@ namespace Generador_X.Controls.ModifiedControls
 {
     class Label_ : Label
     {
+        /// <summary>
+        /// Clase simple para crear labels que se adapten
+        /// al tamaño del texto.
+        /// </summary>
+        /// <param name="text"></param>
         public Label_(string text)
         {
             Text = text;
