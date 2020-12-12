@@ -76,7 +76,7 @@ namespace Generador_X.Model.Enums
         //Basico
         Numero_Fila,
         //Nombre/Personal
-        Primer_Nombre,
+        Nombre,
         Nombre_Completo,
         //Fecha
         Fecha, //Between

@@ -16,24 +16,44 @@ namespace Generador_X.Model
             {EFieldName.Fecha, new FieldType("fecha", "DATE", "Fecha", ECategory.Fecha, EBCategory.Date, EBFieldType.Between, "7.1.2011\n\r15-feb-1996\n\r1 Enero 1492") },
             {EFieldName.Hora, new FieldType("hora", "TIME", "Hora", ECategory.Fecha, EBCategory.Date, EBFieldType.Time, "8:50AM\n\r23:00\n\r12:03PM") },
             //Name
-            {EFieldName.Primer_Nombre, new FieldType("primer_nombre", "VARCHAR(50)", "Primer Nombre", ECategory.Nombre, EBCategory.Name, EBFieldType.FirstName, "Shamil\n\rAdonis\n\rTiatira")},
+            {EFieldName.Nombre, new FieldType("nombre", "VARCHAR(50)", "Nombre", ECategory.Nombre, EBCategory.Name, EBFieldType.FirstName, "Shamil\n\rAdonis\n\rTiatira")},
             {EFieldName.Nombre_Completo, new FieldType("nombre_completo", "VARCHAR(50)", "Nombre Completo", ECategory.Nombre, EBCategory.Name, EBFieldType.FullName, "Shamil Carela\n\rAdonis Castillo\n\rAngelica María Rijo")},
-            {EFieldName.Apellido, new FieldType("Apellido", "VARCHAR(50)", "Apellido", ECategory.Nombre, EBCategory.Name, EBFieldType.LastName, "Carela\n\rCastillo\n\rRijo")},
+            {EFieldName.Apellido, new FieldType("apellido", "VARCHAR(50)", "Apellido", ECategory.Nombre, EBCategory.Name, EBFieldType.LastName, "Carela\n\rCastillo\n\rRijo")},
             //Address
             //{EFieldName.Ciudad, new FieldType("Apellido", "VARCHAR(50)", "Apellido", ECategory.Nombre, EBCategory.Name, EBFieldType.LastName, "Carela\n\rCastillo\n\rRijo")},
             //
         };
     }
 
-    //TODO: Cambiar el esquema Field a Column (ya que tecnicamente cada paneltype es una 'columna' no un 'campo'.
     public class FieldType
     {
+        /// <summary>
+        /// Texto del nombre de campo. (TextBox.Text)
+        /// </summary>
         public string ColumName;
+        /// <summary>
+        /// Nombre del campo para busqueda.
+        /// </summary>
         public string SearchName;
+        /// <summary>
+        /// Nombre de Categoria para busqueda.
+        /// </summary>
         public ECategory SearchCategoryName;
+        /// <summary>
+        /// Tipo de campo para Bogus.
+        /// </summary>
         public EBFieldType BName;
+        /// <summary>
+        /// Categoria de campo en Bogus.
+        /// </summary>
         public EBCategory BCategoryName;
+        /// <summary>
+        /// Ejemplo para mostrar en lista.
+        /// </summary>
         public string Example;
+        /// <summary>
+        /// Tipo de columna para mostrar en creacion de tabla.
+        /// </summary>
         public string ColumnType;
 
         /// <summary>

@@ -31,6 +31,7 @@ namespace Generador_X.Controls
             Size = new Size(parent.Width - 10, 50);
             BorderStyle = BorderStyle.FixedSingle;
             Padding = new Padding(4);
+            BackColor = Color.Gainsboro;
 
             Panel ConstantPanel = new Panel
             {
@@ -74,6 +75,8 @@ namespace Generador_X.Controls
                 Image = (Bitmap)resources.GetObject("Open Folder_50px"),
                 ImageAlign = ContentAlignment.MiddleRight,
                 Size = new Size(120, 23),
+                FlatStyle = FlatStyle.Flat,
+                BackColor = Color.White,
             };
 
             //Añadir evento de cambiar tipo de campo.
