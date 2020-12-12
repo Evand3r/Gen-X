@@ -66,14 +66,23 @@ namespace Generador_X.Model
             {
                 if (EBCat != null && EBFld != null)
                 {
+                    string parseStr = q + "{{" + $"{EBCat?.ToString().ToLower()}.{EBFld?.ToString().ToLower()}" + "}}" + q;
+
                     value = Enumerable.Range(1, d)
-                        .Select(_ => fkr.Parse("{{" + q + $"{(EBCategory)EBCat }.{(EBFieldType)EBFld}" + q + "'}}").OrDefault(fkr, Nulls, NullValue).ToString())
+                        .Select(_ => fkr.Parse(parseStr).OrDefault(fkr, Nulls, NullValue).ToString())
                         .ToArray();
                 }
             }
             catch (Exception e)
             {
-                ErrorHandler.ShowMessage("Ha ocurrido un error inesperado", MessageType.error);
+                if (e.Message.StartsWith("Unknown method"))
+                {
+                    ErrorHandler.ShowMessage($"El idioma actualmente seleccionado no soporta el tipo de dato {FieldTypes.Types.FirstOrDefault(p => p.Value.BName == EBFld).Value.SearchName}");
+                }
+                else
+                {
+                    ErrorHandler.ShowMessage("Ha ocurrido un error inesperado.", MessageType.error);
+                }
             }
 
             //Si el array esta vacio llenarlo de null value o string
@@ -137,8 +146,10 @@ namespace Generador_X.Model
 
         public override string[] Generate(Faker fkr, int d, string q = "", string NullValue = "Null")
         {
+            string parseStr = q + "{{Name." + FieldType + "}}" + q;
+
             return Enumerable.Range(1, d)
-                .Select(_ => fkr.Parse(q + "{{Name." + FieldType + "}}" + q).OrDefault(fkr, Nulls, NullValue))
+                .Select(_ => fkr.Parse(parseStr).OrDefault(fkr, Nulls, NullValue))
                 .ToArray();
         }
 
