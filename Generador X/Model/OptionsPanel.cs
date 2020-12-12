@@ -18,8 +18,6 @@ namespace Generador_X.Model
     /// </summary>
     class BaseOptionsType : IOptions<string?[]>
     {
-        //TODO: Añadir soporte para otros idiomas
-        public Faker fkr = new Faker("es");
         public Label lblBlanks = new Label_("Nulos") { Margin = new Padding(0, 6, 0, 6) };
         /// <summary>
         /// Campo para el porcentaje de nulos de una columna.
@@ -61,15 +59,15 @@ namespace Generador_X.Model
             EBFld = ebfld;
         }
 
-        public virtual string?[] Generate(int d)
+        public virtual string[] Generate(Faker fkr, int d, string q = "", string NullValue = "Null")
         {
-            string?[] value = new string?[] { };
+            string[] value = new string[] { };
             try
             {
                 if (EBCat != null && EBFld != null)
                 {
                     value = Enumerable.Range(1, d)
-                        .Select(_ => fkr.Parse("{{'" + $"{(EBCategory)EBCat }.{(EBFieldType)EBFld}" + "'}}").OrNull(fkr, Nulls)?.ToString())
+                        .Select(_ => fkr.Parse("{{" + q + $"{(EBCategory)EBCat }.{(EBFieldType)EBFld}" + q + "'}}").OrDefault(fkr, Nulls, NullValue).ToString())
                         .ToArray();
                 }
             }
@@ -78,9 +76,10 @@ namespace Generador_X.Model
                 ErrorHandler.ShowMessage("Ha ocurrido un error inesperado", MessageType.error);
             }
 
-            if(value.Length != d)
+            //Si el array esta vacio llenarlo de null value o string
+            if (value.Length == 0)
             {
-                value = Enumerable.Repeat(string.Empty, d).ToArray();
+                value = Enumerable.Repeat(NullValue.Length > 0 ? NullValue : string.Empty, d).ToArray();
             }
 
             return value;
@@ -92,15 +91,15 @@ namespace Generador_X.Model
     /// </summary>
     class RowNumberOptionsType : BaseOptionsType
     {
-        public override string?[] Generate(int d)
+        public override string[] Generate(Faker fkr, int d, string q = "", string NullValue = "Null")
         {
             int Value = 1;
-            int?[] a = new int?[d];
+            string[] a = new string[d];
 
             if (Nulls == 0)
             {
                 var arr = Enumerable.Range(1, d).ToArray();
-                a = Array.ConvertAll(arr, b => (int?)b);
+                a = Array.ConvertAll(arr, b => b.ToString());
             }
             else
             {
@@ -108,14 +107,18 @@ namespace Generador_X.Model
                 {
                     if (fkr.PickRandom(true, false).OrDefault(fkr, Nulls, false))
                     {
-                        a[b] = Value;
+                        a[b] = Value.ToString();
+                    }
+                    else
+                    {
+                        a[b] = NullValue;
                     }
 
                     Value++;
                 }
             }
 
-            return Array.ConvertAll(a, b => b.ToString());
+            return a;
         }
     }
 
@@ -132,10 +135,10 @@ namespace Generador_X.Model
             FieldType = fld;
         }
 
-        public override string?[] Generate(int d)
+        public override string[] Generate(Faker fkr, int d, string q = "", string NullValue = "Null")
         {
             return Enumerable.Range(1, d)
-                .Select(_ => fkr.Parse("'{{Name." + $"{FieldType}" + "}}'").OrNull(fkr, Nulls))
+                .Select(_ => fkr.Parse(q + "{{Name." + FieldType + "}}" + q).OrDefault(fkr, Nulls, NullValue))
                 .ToArray();
         }
 
@@ -191,20 +194,37 @@ namespace Generador_X.Model
                         "yyyy/MM/dd",
                 };
             }
+
             panelControls.InsertRange(0, new Control[] { DTFrom, lblto, DTTo, lblfmt, CBDateFormats });
         }
 
-        public override string[] Generate(int d)
+        public override string[] Generate(Faker fkr, int d, string q = "", string NullValue = "Null")
         {
-            return Enumerable.Range(1, d)
-                .Select(_ => "'" + fkr.Date.Between(DTFrom.Value, DTTo.Value).ToString(SelectedFormat).OrNull(fkr, Nulls) + "'")
-                .ToArray();
+            List<string> result = Enumerable.Range(1, d)
+                .Select(_ => q + fkr.Date.Between(DTFrom.Value, DTTo.Value).ToString(SelectedFormat).OrDefault(fkr, Nulls, NullValue) + q)
+                .ToList();
+
+            if (Nulls > 0)
+            {
+                //Quitar las comillas de los valore nulos.
+                result = result.ConvertAll(p => p == $"'{NullValue}'" ? "Null" : p);
+            }
+
+            return result.ToArray();
         }
     }
 #nullable disable
 
     public interface IOptions<T>
     {
-        public T Generate(int d);
+        /// <summary>
+        /// Generar datos tipo T.
+        /// </summary>
+        /// <param name="fkr"></param>
+        /// <param name="d"></param>
+        /// <param name="q"></param>
+        /// <param name="NullValue"></param>
+        /// <returns></returns>
+        public T Generate(Faker fkr, int d, string q, string NullValue = "Null");
     }
 }
