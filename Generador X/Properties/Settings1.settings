@@ -5,5 +5,8 @@
     <Setting Name="Idioma" Type="System.String" Scope="User">
       <Value Profile="(Default)">es</Value>
     </Setting>
+    <Setting Name="NullValue" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Null</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

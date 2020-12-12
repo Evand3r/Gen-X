@@ -34,5 +34,17 @@ namespace Generador_X.Properties {
                 this["Idioma"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Null")]
+        public string NullValue {
+            get {
+                return ((string)(this["NullValue"]));
+            }
+            set {
+                this["NullValue"] = value;
+            }
+        }
     }
 }

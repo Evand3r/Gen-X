@@ -19,20 +19,24 @@ namespace Generador_X
         /// <summary>
         /// Instancia de faker.
         /// </summary>
-        private Faker fkr = new Faker(Settings1.Default.Idioma);
+        private readonly Faker fkr = new Faker(Settings1.Default.Idioma);
         /// <summary>
         /// Formatos de salida.
         /// </summary>
-        private EOutputFormat OutputFormat;
+        private readonly EOutputFormat OutputFormat;
         /// <summary>
         /// Lista de campos.
         /// </summary>
-        private List<FieldPanel> Fields = new List<FieldPanel>();
-        private FlowLayoutPanel Options;
+        private readonly List<FieldPanel> Fields = new List<FieldPanel>();
+        private readonly FlowLayoutPanel Options;
         /// <summary>
         /// Caracter de nueva linea.
         /// </summary>
         private readonly string nl = Environment.NewLine;
+        /// <summary>
+        /// Valorn nulo por defecto.
+        /// </summary>
+        private string DefaultNullValue = Settings1.Default.NullValue;
         /// <summary>
         /// Resultado de la generacion de datos.
         /// </summary>
@@ -59,6 +63,7 @@ namespace Generador_X
                     GenerateSQL(preview);
                     break;
                 case EOutputFormat.JSON:
+                    GenerateJSON(preview);
                     break;
                 case EOutputFormat.CSV:
                     break;
@@ -75,8 +80,19 @@ namespace Generador_X
             }
         }
 
+        private void GenerateJSON(bool preview)
+        {
+            throw new NotImplementedException();
+        }
+
         private void GenerateSQL(bool preview)
         {
+            SaveFileDialog Save = new SaveFileDialog();
+            StreamWriter writer = null;
+
+            Cursor.Current = Cursors.WaitCursor;
+            Application.DoEvents();
+
             try
             {
                 if (preview)
@@ -92,8 +108,6 @@ namespace Generador_X
                 string values = "";
                 string valuesChanged = "";
                 List<string[]> valuesArr = new List<string[]>();
-                SaveFileDialog Save = new SaveFileDialog();
-                StreamWriter writer = null;
 
                 if (!preview)
                 {
@@ -130,7 +144,7 @@ namespace Generador_X
                 SQLLine = SQLLine.Replace("+", columns);
                 SQLLine = SQLLine.Replace("__", tableName);
 
-                valuesArr.AddRange(Fields.ConvertAll(p => p.OptionsPanel.Options.Generate(fkr, Convert.ToInt32(Lines), "\'")).ToArray());
+                valuesArr.AddRange(Fields.ConvertAll(p => p.OptionsPanel.Options.Generate(fkr, Convert.ToInt32(Lines), "\'", DefaultNullValue)).ToArray());
 
                 if (!preview && Save.FileName != "")
                 {
@@ -165,6 +179,15 @@ namespace Generador_X
             catch (Exception e)
             {
                 ErrorHandler.ShowMessage(e.ToString());
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+                if (writer != null)
+                {
+                    writer.Dispose();
+                    writer.Close();
+                }
             }
         }
     }
