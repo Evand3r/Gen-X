@@ -10,11 +10,11 @@ using Generador_X.Properties;
 
 namespace Generador_X.Controls
 {
-    class FieldPanel : Panel, IFieldBase
+    class FieldPanel : Panel
     {
         public string FieldName
         {
-            get { return TBFieldName.Text; }
+            get { return TBFieldName.Text.Trim(); }
             set { TBFieldName.Text = value; }
         }
         public FieldType FieldType;
@@ -104,19 +104,9 @@ namespace Generador_X.Controls
                 Dock = DockStyle.Right,
             };
 
-            RemoveSelf.Click += new EventHandler(Remove);
+            RemoveSelf.Click += new EventHandler((object o, EventArgs e) => { (parent.Parent as MainView).RemoveField(this, e); });
 
             Controls.AddRange(new Control[] { OptionsPanel, RemoveSelf, ConstantPanel, });
-        }
-
-        /// <summary>
-        /// Elimiar campo.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void Remove(object sender, EventArgs e)
-        {
-            Dispose();
         }
     }
 }

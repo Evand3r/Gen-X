@@ -54,7 +54,7 @@ namespace Generador_X
             this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.BttnAddField = new System.Windows.Forms.PictureBox();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.PanelFlechas = new System.Windows.Forms.Panel();
             this.BttnBajar = new System.Windows.Forms.Button();
             this.BttnSubir = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -78,7 +78,7 @@ namespace Generador_X
             this.panel6.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BttnAddField)).BeginInit();
-            this.panel4.SuspendLayout();
+            this.PanelFlechas.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -114,6 +114,7 @@ namespace Generador_X
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.LightGray;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.BTNPreview);
             this.panel1.Controls.Add(this.BtnGenerar);
@@ -223,6 +224,7 @@ namespace Generador_X
             // StackedPanel
             // 
             this.StackedPanel.AutoScroll = true;
+            this.StackedPanel.BackColor = System.Drawing.SystemColors.ControlLight;
             this.StackedPanel.Controls.Add(this.panel3);
             this.StackedPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.StackedPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -235,6 +237,7 @@ namespace Generador_X
             // 
             // panel3
             // 
+            this.panel3.BackColor = System.Drawing.Color.Gainsboro;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.flowLayoutPanel2);
             this.panel3.Controls.Add(this.pictureBox1);
@@ -314,6 +317,8 @@ namespace Generador_X
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button1.Location = new System.Drawing.Point(211, 8);
@@ -322,15 +327,16 @@ namespace Generador_X
             this.button1.TabIndex = 2;
             this.button1.Text = "button1";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             // 
             // panel2
             // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.BttnAddField);
             this.panel2.Controls.Add(label5);
             this.panel2.Controls.Add(label4);
             this.panel2.Controls.Add(label2);
-            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Controls.Add(this.PanelFlechas);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 24);
             this.panel2.Name = "panel2";
@@ -343,7 +349,7 @@ namespace Generador_X
             this.BttnAddField.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BttnAddField.BackgroundImage")));
             this.BttnAddField.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BttnAddField.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BttnAddField.Location = new System.Drawing.Point(835, 0);
+            this.BttnAddField.Location = new System.Drawing.Point(833, 0);
             this.BttnAddField.Margin = new System.Windows.Forms.Padding(5);
             this.BttnAddField.Name = "BttnAddField";
             this.BttnAddField.Size = new System.Drawing.Size(49, 50);
@@ -352,15 +358,16 @@ namespace Generador_X
             this.toolTip1.SetToolTip(this.BttnAddField, "Añadir campo.");
             this.BttnAddField.Click += new System.EventHandler(this.BttnAddField_Click);
             // 
-            // panel4
+            // PanelFlechas
             // 
-            this.panel4.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.panel4.Controls.Add(this.BttnBajar);
-            this.panel4.Controls.Add(this.BttnSubir);
-            this.panel4.Location = new System.Drawing.Point(746, 3);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(81, 41);
-            this.panel4.TabIndex = 4;
+            this.PanelFlechas.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.PanelFlechas.Controls.Add(this.BttnBajar);
+            this.PanelFlechas.Controls.Add(this.BttnSubir);
+            this.PanelFlechas.Enabled = false;
+            this.PanelFlechas.Location = new System.Drawing.Point(744, 2);
+            this.PanelFlechas.Name = "PanelFlechas";
+            this.PanelFlechas.Size = new System.Drawing.Size(81, 41);
+            this.PanelFlechas.TabIndex = 4;
             // 
             // BttnBajar
             // 
@@ -411,7 +418,6 @@ namespace Generador_X
             this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
             this.exitToolStripMenuItem1.Size = new System.Drawing.Size(96, 22);
             this.exitToolStripMenuItem1.Text = "&Salir";
-            this.exitToolStripMenuItem1.Click += menuStrip1_ItemClicked;
             // 
             // toolsToolStripMenuItem
             // 
@@ -426,7 +432,6 @@ namespace Generador_X
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.optionsToolStripMenuItem.Text = "&Opciones";
-            this.optionsToolStripMenuItem.Click += menuStrip1_ItemClicked;
             // 
             // helpToolStripMenuItem
             // 
@@ -434,7 +439,7 @@ namespace Generador_X
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
-            this.helpToolStripMenuItem.Text = "&Ayuda";
+            this.helpToolStripMenuItem.Text = "Ay&uda";
             // 
             // aboutToolStripMenuItem
             // 
@@ -476,7 +481,7 @@ namespace Generador_X
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BttnAddField)).EndInit();
-            this.panel4.ResumeLayout(false);
+            this.PanelFlechas.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -499,7 +504,7 @@ namespace Generador_X
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel PanelFlechas;
         private System.Windows.Forms.Button BttnBajar;
         private System.Windows.Forms.Button BttnSubir;
         private System.Windows.Forms.FlowLayoutPanel PanelFormatoOpciones;

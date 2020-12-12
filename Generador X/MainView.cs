@@ -40,6 +40,11 @@ namespace Generador_X
 
             CBFormatoSalida.DataSource = Enum.GetValues(typeof(EOutputFormat));
             CBFormatoSalida.SelectedIndex = 0;
+
+
+            exitToolStripMenuItem1.Click += new EventHandler(MenuStrip1_ItemClicked);
+            optionsToolStripMenuItem.Click += new EventHandler(MenuStrip1_ItemClicked);
+            helpToolStripMenuItem.Click += new EventHandler(MenuStrip1_ItemClicked);
         }
 
         /// <summary>
@@ -49,20 +54,7 @@ namespace Generador_X
         /// <param name="e"></param>
         private void BtnSubir_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (FocusedControl != null)
-                {
-                    StackedPanel.Controls.SetChildIndex(
-                        FocusedControl,
-                        StackedPanel.Controls.GetChildIndex(FocusedControl) - 1);
-                    StackedPanel.ScrollControlIntoView(FocusedControl);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+            MoveField(-1);
         }
 
         /// <summary>
@@ -72,13 +64,18 @@ namespace Generador_X
         /// <param name="e"></param>
         private void BtnBajar_Click(object sender, EventArgs e)
         {
+            MoveField(1);
+        }
+
+        private void MoveField(int pos)
+        {
             try
             {
                 if (FocusedControl != null)
                 {
                     StackedPanel.Controls.SetChildIndex(
                         FocusedControl,
-                        StackedPanel.Controls.GetChildIndex(FocusedControl) + 1
+                        StackedPanel.Controls.GetChildIndex(FocusedControl) + pos
                         );
                     StackedPanel.ScrollControlIntoView(FocusedControl);
                 }
@@ -97,6 +94,7 @@ namespace Generador_X
                 //Deseleccionar el control.
                 FocusedControl = null;
                 (sender as Control).Invalidate();
+                PanelFlechas.Enabled = false;
             }
             else
             {
@@ -106,6 +104,7 @@ namespace Generador_X
                     FocusedControl.Invalidate();
                 }
 
+                PanelFlechas.Enabled = true;
                 FocusedControl = sender as Control;
                 FocusedControl.Invalidate();
             }
@@ -269,7 +268,7 @@ namespace Generador_X
 
             StackedPanel.Controls.AddRange(new Control[] {
                 CreateField(FieldTypes.Types[EFieldName.Numero_Fila]),
-                CreateField(FieldTypes.Types[EFieldName.Primer_Nombre]),
+                CreateField(FieldTypes.Types[EFieldName.Nombre]),
                 CreateField(FieldTypes.Types[EFieldName.Fecha]),
                 CreateField(FieldTypes.Types[EFieldName.Nombre_Completo]),
             });
@@ -288,10 +287,17 @@ namespace Generador_X
 
             p.Paint += new PaintEventHandler(Style_Selected);
             p.Click += new EventHandler(Panel_Click);
-            //Añadir evento para boton de eliminar.
-            p.MouseDoubleClick += new MouseEventHandler((object o, MouseEventArgs e) => { FocusedControl = null; p.Dispose(); });
+            //Eliminar al hacer doblue click en el panel.
+            //p.MouseDoubleClick += RemoveField;
 
             return p;
+        }
+
+        public void RemoveField(object sender, EventArgs e)
+        {
+            FocusedControl = null;
+            PanelFlechas.Enabled = false;
+            (sender as FieldPanel).Dispose();
         }
 
         /// <summary>
@@ -302,8 +308,10 @@ namespace Generador_X
         {
             HashSet<string> columnNames = new HashSet<string>();
             FieldPanels.Clear();
+            bool valid = true;
+
             //TODO: pasar de 2 a 1 una vez terminado la fase de diseño de la interfaz.
-            if(StackedPanel.Controls.Count < 2)
+            if (StackedPanel.Controls.Count < 2)
             {
                 return false;
             }
@@ -321,8 +329,14 @@ namespace Generador_X
                     //Verificar valores nulos
                     if (!uint.TryParse(p.OptionsPanel.Nulls, out NumFilas))
                     {
-                        ErrorHandler.ShowMessage($"El campo 'Nulos' es inválido en la columna '{p.TBFieldName.Text}'", MessageType.error);
-                        return false;
+                        ErrorHandler.ShowMessage($"El campo 'Nulos' es inválido en la columna.'{p.TBFieldName.Text}'", MessageType.error);
+                        valid = false;
+                    }
+
+                    if (string.IsNullOrEmpty(p.FieldName))
+                    {
+                        ErrorHandler.ShowMessage("Los nombres de las columnas no pueden estar vacíos.", MessageType.error);
+                        valid = false;
                     }
                 }
             }
@@ -330,21 +344,26 @@ namespace Generador_X
             //Validar que los nombres de las columnas no sean iguales.
             if (StackedPanel.Controls.Count - 1 > columnNames.Count)
             {
-                ErrorHandler.ShowMessage("Los nombres de las columnas deben ser unicos.", MessageType.error);
-                return false;
+                ErrorHandler.ShowMessage("Los nombres de las columnas deben ser únicos.", MessageType.error);
+                valid = false;
             }
 
             //Validar que el numero de fila es un entero.
-            if (!uint.TryParse(TBNumFilas.Text, out NumFilas) && NumFilas >= 1)
+            if (!uint.TryParse(TBNumFilas.Text, out NumFilas))
             {
-                ErrorHandler.ShowMessage("El numero de filas no es válido.", MessageType.error);
-                return false;
+                ErrorHandler.ShowMessage("El número de filas no es válido.", MessageType.error);
+                valid = false;
+            }
+            else if (NumFilas < 1)
+            {
+                ErrorHandler.ShowMessage("El número de filas a generar debe ser mayor que cero.", MessageType.error);
+                valid = false;
             }
 
-            return true;
+            return valid;
         }
 
-        private void menuStrip1_ItemClicked(object sender, EventArgs e)
+        private void MenuStrip1_ItemClicked(object sender, EventArgs e)
         {
             ToolStripMenuItem item = (ToolStripMenuItem)sender;
 

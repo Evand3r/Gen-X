@@ -3,6 +3,7 @@ using Bogus.Extensions;
 using Generador_X.Controls.ModifiedControls;
 using Generador_X.Model;
 using Generador_X.Model.Enums;
+using Generador_X.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
