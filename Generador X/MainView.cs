@@ -343,5 +343,23 @@ namespace Generador_X
 
             return true;
         }
+
+        private void menuStrip1_ItemClicked(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = (ToolStripMenuItem)sender;
+
+            switch (item.ToString())
+            {
+                case "&Opciones":
+                    SettingsForm SettFrm = new SettingsForm();
+                    SettFrm.ShowDialog();
+                    break;
+                case "&Salir":
+                    Dispose();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

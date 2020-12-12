@@ -1,5 +1,7 @@
-﻿using Generador_X.Controls;
+﻿using Bogus;
+using Generador_X.Controls;
 using Generador_X.Model.Enums;
+using Generador_X.Properties;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,13 +12,31 @@ namespace Generador_X
 {
     class Generador
     {
+        /// <summary>
+        /// Numero de lineas a generar.
+        /// </summary>
         private uint Lines;
-        private string Result;
-        private string SQLLine = "INSERT INTO __ (+) VALUES (-)";
+        /// <summary>
+        /// Instancia de faker.
+        /// </summary>
+        private Faker fkr = new Faker(Settings1.Default.Idioma);
+        /// <summary>
+        /// Formatos de salida.
+        /// </summary>
         private EOutputFormat OutputFormat;
+        /// <summary>
+        /// Lista de campos.
+        /// </summary>
         private List<FieldPanel> Fields = new List<FieldPanel>();
         private FlowLayoutPanel Options;
+        /// <summary>
+        /// Caracter de nueva linea.
+        /// </summary>
         private readonly string nl = Environment.NewLine;
+        /// <summary>
+        /// Resultado de la generacion de datos.
+        /// </summary>
+        private string Result;
 
         public Generador(FieldPanel[] fields, EOutputFormat format, uint lines, FlowLayoutPanel options)
         {
@@ -65,6 +85,7 @@ namespace Generador_X
                     Lines = Lines > 100 ? 100 : Lines;
                 }
 
+                string SQLLine = "INSERT INTO __ (+) VALUES (-)";
                 string createTableStr = "";
                 string tableName = (Options.Controls.Find("TableName", true)[0] as TextBox).Text;
                 string columns = "";
@@ -109,7 +130,7 @@ namespace Generador_X
                 SQLLine = SQLLine.Replace("+", columns);
                 SQLLine = SQLLine.Replace("__", tableName);
 
-                valuesArr.AddRange(Fields.ConvertAll(p => p.OptionsPanel.Options.Generate(Convert.ToInt32(Lines))).ToArray());
+                valuesArr.AddRange(Fields.ConvertAll(p => p.OptionsPanel.Options.Generate(fkr, Convert.ToInt32(Lines), "\'")).ToArray());
 
                 if (!preview && Save.FileName != "")
                 {

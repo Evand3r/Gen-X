@@ -20,10 +20,6 @@ namespace Generador_X
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainView());
-
-            //var text = new Ubicacion("es").CodigoPostal();
-            //string Daito1 = $".Between({DateTime.Now},{DateTime.Now.AddYears(-1)})";
-            //var text = new Faker("es").Parse("Nombre: {{Date" + Daito1 + "}}");
         }
     }
 }
