@@ -266,6 +266,12 @@ namespace Generador_X
                     CheckBox ckbxIncluirNull = new CheckB_("IncludeNull", "Incluir valores nulos");
                     opciones.AddRange(new Control[] { ckbxArrayJson, ckbxIncluirNull });
                     break;
+                case "CSV":
+                case "TSV":
+                    Label lblInc = new Label_("Incluir: ");
+                    CheckBox ckbxHeader = new CheckB_("IncludeHeader", "Cabezera", true);
+                    opciones.AddRange(new Control[] { lblInc, ckbxHeader });
+                    break;
                 default:
                     break;
             }

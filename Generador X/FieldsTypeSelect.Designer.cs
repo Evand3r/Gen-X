@@ -108,8 +108,11 @@ namespace Generador_X
             // 
             // TBSearchFieldType
             // 
+            this.TBSearchFieldType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TBSearchFieldType.Location = new System.Drawing.Point(452, 11);
+            this.TBSearchFieldType.MaximumSize = new System.Drawing.Size(200, 23);
             this.TBSearchFieldType.Name = "TBSearchFieldType";
+            this.TBSearchFieldType.PlaceholderText = "Buscar campo";
             this.TBSearchFieldType.Size = new System.Drawing.Size(184, 23);
             this.TBSearchFieldType.TabIndex = 1;
             this.TBSearchFieldType.TextChanged += new System.EventHandler(this.SearchTB_TextChanged);

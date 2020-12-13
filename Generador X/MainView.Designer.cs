@@ -376,6 +376,7 @@ namespace Generador_X
             // 
             this.BttnBajar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BttnBajar.BackgroundImage")));
             this.BttnBajar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BttnBajar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BttnBajar.Location = new System.Drawing.Point(46, 3);
             this.BttnBajar.Name = "BttnBajar";
             this.BttnBajar.Size = new System.Drawing.Size(35, 35);
@@ -388,6 +389,7 @@ namespace Generador_X
             // 
             this.BttnSubir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BttnSubir.BackgroundImage")));
             this.BttnSubir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BttnSubir.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BttnSubir.Location = new System.Drawing.Point(0, 3);
             this.BttnSubir.Name = "BttnSubir";
             this.BttnSubir.Size = new System.Drawing.Size(35, 35);
