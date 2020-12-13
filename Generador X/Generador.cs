@@ -42,8 +42,8 @@ namespace Generador_X
         /// Resultado de la generacion de datos.
         /// </summary>
         private string Result;
-        private bool Preview;
-        private string identation = "    ";
+        private readonly bool Preview;
+        private readonly string identation = "    ";
 
         public Generador(FieldPanel[] fields, EOutputFormat format, uint lines, FlowLayoutPanel options, bool preview = false)
         {
@@ -89,48 +89,92 @@ namespace Generador_X
             }
         }
 
-        //TODO: DIVIDIR ENTRE ARRAY O NO EN ARRAY
         private void GenerateJSON()
         {
-            //Get options
-            bool asArray = (Options.Controls.Find("JsonAsArray", true)[0] as CheckBox).Checked;
-            bool includeNull = (Options.Controls.Find("IncludeNull", true)[0] as CheckBox).Checked;
+            SaveFileDialog Save = new SaveFileDialog();
+            StreamWriter writer = null;
 
-            string baseJsonStr = "\"+\": -";
-            string JsonLine = "{_}" + (asArray ? "," : "");
-            string tmp = "";
-            List<string[]> valuesArr = new List<string[]>();
-            valuesArr.AddRange(Fields.ConvertAll(p => p.OptionsPanel.Options.Generate(fkr, Convert.ToInt32(Lines), "\'", DefaultNullValue)).ToArray());
+            Cursor.Current = Cursors.WaitCursor;
+            Application.DoEvents();
 
-            //Si es array, añadir bracket inicial
-            Result = (asArray ? "[" : "");
-
-            for (int i = 0; i < Lines; i++)
+            try
             {
-                tmp = "";
-                for (int j = 0; j < Fields.Count; j++)
-                {
-                    FieldPanel p = Fields.ElementAt(j);
+                //Get options
+                bool asArray = (Options.Controls.Find("JsonAsArray", true)[0] as CheckBox).Checked;
+                bool includeNull = (Options.Controls.Find("IncludeNull", true)[0] as CheckBox).Checked;
 
-                    if (includeNull || valuesArr[j][i] != DefaultNullValue)
+                string baseJsonStr = "\"+\": -";
+                string JsonLine = "{_}" + (asArray ? "," : "");
+                string tmp = "";
+                List<string[]> valuesArr = new List<string[]>();
+                valuesArr.AddRange(Fields.ConvertAll(p => p.OptionsPanel.Options.Generate(fkr, Convert.ToInt32(Lines), "\"", DefaultNullValue)).ToArray());
+
+                if (!Preview)
+                {
+                    Save.Filter = "Json files (*.json)|*.json";
+                    Save.Title = "Guardar archivo JSON";
+                    //Nombre del archivo por defecto.
+                    Save.FileName = "GEN_X.json";
+                    Save.ShowDialog();
+                    writer = new StreamWriter(Save.OpenFile());
+                }
+
+                Result = (asArray ? "[" : "");
+
+                for (int i = 0; i < Lines; i++)
+                {
+                    tmp = "";
+                    for (int j = 0; j < Fields.Count; j++)
                     {
-                        tmp += (asArray ? identation : "") + 
-                            baseJsonStr.Replace("+", p.FieldName).Replace("-", valuesArr[j][i] + ",") + 
-                            (asArray && j + 1 != Fields.Count ? nl : "");
+                        FieldPanel p = Fields.ElementAt(j);
+
+                        if (includeNull || valuesArr[j][i] != DefaultNullValue)
+                        {
+                            tmp += (asArray ? identation : "") +
+                                baseJsonStr.Replace("+", p.FieldName).Replace("-", valuesArr[j][i] + ",") +
+                                (asArray && j + 1 != Fields.Count ? nl : "");
+                        }
+                    }
+
+                    tmp = !tmp.Equals(string.Empty) || !asArray ? (asArray ? nl : "") + tmp.TrimEnd(',') + (!asArray ? "" : nl) : nl;
+
+                    if (!Preview)
+                    {
+                        writer.WriteLine(JsonLine.Replace("_", tmp));
+                    }
+                    else
+                    {
+                        Result += JsonLine.Replace("_", tmp) + (!asArray ? nl : "");
                     }
                 }
 
-                tmp = !tmp.Equals(string.Empty) ? (asArray ? nl : "") + tmp.TrimEnd(',') + (tmp.EndsWith(nl) && asArray ? "" : nl) : nl;
+                if (!Preview)
+                {
+                    writer.Write(asArray ? "]" : "");
+                }
+                else
+                {
+                    Result = Result.TrimEnd(',') + (asArray ? "]" : "");
+                }
 
-                Result += JsonLine.Replace("_", tmp)/* + nl*/;
+                if (Preview)
+                {
+                    PreviewForm PreviewFrm = new PreviewForm(Result);
+                    PreviewFrm.ShowDialog();
+                }
             }
-
-            Result = Result.TrimEnd(',') + (asArray ? "]" : "");
-
-            if (Preview)
+            catch (Exception e)
             {
-                PreviewForm PreviewFrm = new PreviewForm(Result);
-                PreviewFrm.ShowDialog();
+                ErrorHandler.ShowMessage($"Ha ocurrido un error inesperado: {e}");
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+                if (writer != null)
+                {
+                    writer.Dispose();
+                    writer.Close();
+                }
             }
         }
 
@@ -156,7 +200,7 @@ namespace Generador_X
                 if (!Preview)
                 {
                     Save.Filter = "SQL Script|*.sql";
-                    Save.Title = "Save an Image File";
+                    Save.Title = "Guardar script SQL";
                     //Nombre del archivo por defecto.
                     Save.FileName = tableName == "" ? "GEN_X.sql" : tableName + ".sql";
                     Save.ShowDialog();
