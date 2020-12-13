@@ -89,6 +89,7 @@ namespace Generador_X
             }
         }
 
+        //TODO: DIVIDIR ENTRE ARRAY O NO EN ARRAY
         private void GenerateJSON()
         {
             //Get options
@@ -119,7 +120,7 @@ namespace Generador_X
                     }
                 }
 
-                tmp = !tmp.Equals(string.Empty) ? (asArray ? nl : "") + tmp.TrimEnd(',') + (tmp.EndsWith(nl) ? "" : nl) : nl;
+                tmp = !tmp.Equals(string.Empty) ? (asArray ? nl : "") + tmp.TrimEnd(',') + (tmp.EndsWith(nl) && asArray ? "" : nl) : nl;
 
                 Result += JsonLine.Replace("_", tmp)/* + nl*/;
             }

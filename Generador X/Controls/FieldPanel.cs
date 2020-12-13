@@ -62,7 +62,7 @@ namespace Generador_X.Controls
             }
             else
             {
-                FieldName = fType.ColumName;
+                FieldName = fType.ColumName.ToLower();
             }
 
             //Boton para seleccionar el tipo de campo.
@@ -70,11 +70,11 @@ namespace Generador_X.Controls
             {
                 Cursor = Cursors.Hand,
                 Location = new Point(211, 8),
-                Text = fType.SearchName,
+                Text = fType.SearchName.ToString(),
                 TextAlign = ContentAlignment.MiddleLeft,
                 Image = (Bitmap)resources.GetObject("Open Folder_50px"),
                 ImageAlign = ContentAlignment.MiddleRight,
-                Size = new Size(120, 23),
+                Size = new Size(140, 23),
                 FlatStyle = FlatStyle.Flat,
                 BackColor = Color.White,
             };
