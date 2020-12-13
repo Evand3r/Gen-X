@@ -32,6 +32,7 @@ namespace Generador_X.Controls
             BorderStyle = BorderStyle.FixedSingle;
             Padding = new Padding(4);
             BackColor = Color.Gainsboro;
+            Cursor = Cursors.Hand;
 
             Panel ConstantPanel = new Panel
             {
@@ -39,6 +40,7 @@ namespace Generador_X.Controls
                 MinimumSize = new Size(370, 0),
                 Dock = DockStyle.Left,
                 Padding = new Padding(0),
+                Cursor = Cursors.Hand,
             };
 
             FieldType = fType;

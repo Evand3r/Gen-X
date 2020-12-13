@@ -25,6 +25,7 @@ namespace Generador_X.Controls
             Padding = new Padding(4);
             WrapContents = false;
             Dock = DockStyle.Fill;
+            Cursor = Cursors.Hand;
 
             ftype = fieldType;
 

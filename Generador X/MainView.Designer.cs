@@ -127,6 +127,7 @@ namespace Generador_X
             // BTNPreview
             // 
             this.BTNPreview.BackColor = System.Drawing.Color.White;
+            this.BTNPreview.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BTNPreview.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.BTNPreview.FlatAppearance.BorderSize = 2;
             this.BTNPreview.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gainsboro;
@@ -145,6 +146,7 @@ namespace Generador_X
             // BtnGenerar
             // 
             this.BtnGenerar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(150)))), ((int)(((byte)(170)))));
+            this.BtnGenerar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnGenerar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.BtnGenerar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Green;
             this.BtnGenerar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
