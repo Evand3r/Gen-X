@@ -5,6 +5,7 @@ using Generador_X.Properties;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -41,16 +42,25 @@ namespace Generador_X
         /// Resultado de la generacion de datos.
         /// </summary>
         private string Result;
+        private bool Preview;
+        private string identation = "    ";
 
-        public Generador(FieldPanel[] fields, EOutputFormat format, uint lines, FlowLayoutPanel options)
+        public Generador(FieldPanel[] fields, EOutputFormat format, uint lines, FlowLayoutPanel options, bool preview = false)
         {
             OutputFormat = format;
             Lines = lines;
             Options = options;
             Fields.AddRange(fields);
+            Preview = preview;
+
+            if (Preview)
+            {
+                //Tamaño limite de lineas en modo vista previa
+                Lines = Lines > 100 ? 100 : Lines;
+            }
         }
 
-        public void Generate(bool preview = false)
+        public void Generate()
         {
             if (Lines == 0)
             {
@@ -60,13 +70,12 @@ namespace Generador_X
             switch (OutputFormat)
             {
                 case EOutputFormat.SQL:
-                    GenerateSQL(preview);
+                    GenerateSQL();
                     break;
                 case EOutputFormat.JSON:
-                    GenerateJSON(preview);
+                    GenerateJSON();
                     break;
                 case EOutputFormat.CSV:
-                    break;
                 case EOutputFormat.TSV:
                     break;
                 case EOutputFormat.Excel:
@@ -80,12 +89,51 @@ namespace Generador_X
             }
         }
 
-        private void GenerateJSON(bool preview)
+        private void GenerateJSON()
         {
-            throw new NotImplementedException();
+            //Get options
+            bool asArray = (Options.Controls.Find("JsonAsArray", true)[0] as CheckBox).Checked;
+            bool includeNull = (Options.Controls.Find("IncludeNull", true)[0] as CheckBox).Checked;
+
+            string baseJsonStr = "\"+\": -";
+            string JsonLine = "{_}" + (asArray ? "," : "");
+            string tmp = "";
+            List<string[]> valuesArr = new List<string[]>();
+            valuesArr.AddRange(Fields.ConvertAll(p => p.OptionsPanel.Options.Generate(fkr, Convert.ToInt32(Lines), "\'", DefaultNullValue)).ToArray());
+
+            //Si es array, añadir bracket inicial
+            Result = (asArray ? "[" : "");
+
+            for (int i = 0; i < Lines; i++)
+            {
+                tmp = "";
+                for (int j = 0; j < Fields.Count; j++)
+                {
+                    FieldPanel p = Fields.ElementAt(j);
+
+                    if (includeNull || valuesArr[j][i] != DefaultNullValue)
+                    {
+                        tmp += (asArray ? identation : "") + 
+                            baseJsonStr.Replace("+", p.FieldName).Replace("-", valuesArr[j][i] + ",") + 
+                            (asArray && j + 1 != Fields.Count ? nl : "");
+                    }
+                }
+
+                tmp = !tmp.Equals(string.Empty) ? (asArray ? nl : "") + tmp.TrimEnd(',') + (tmp.EndsWith(nl) ? "" : nl) : nl;
+
+                Result += JsonLine.Replace("_", tmp)/* + nl*/;
+            }
+
+            Result = Result.TrimEnd(',') + (asArray ? "]" : "");
+
+            if (Preview)
+            {
+                PreviewForm PreviewFrm = new PreviewForm(Result);
+                PreviewFrm.ShowDialog();
+            }
         }
 
-        private void GenerateSQL(bool preview)
+        private void GenerateSQL()
         {
             SaveFileDialog Save = new SaveFileDialog();
             StreamWriter writer = null;
@@ -95,11 +143,6 @@ namespace Generador_X
 
             try
             {
-                if (preview)
-                {
-                    //Tamaño limite de lineas en modo vista previa
-                    Lines = Lines > 100 ? 100 : Lines;
-                }
 
                 string SQLLine = "INSERT INTO __ (+) VALUES (-)";
                 string createTableStr = "";
@@ -109,7 +152,7 @@ namespace Generador_X
                 string valuesChanged = "";
                 List<string[]> valuesArr = new List<string[]>();
 
-                if (!preview)
+                if (!Preview)
                 {
                     Save.Filter = "SQL Script|*.sql";
                     Save.Title = "Save an Image File";
@@ -146,7 +189,7 @@ namespace Generador_X
 
                 valuesArr.AddRange(Fields.ConvertAll(p => p.OptionsPanel.Options.Generate(fkr, Convert.ToInt32(Lines), "\'", DefaultNullValue)).ToArray());
 
-                if (!preview && Save.FileName != "")
+                if (!Preview && Save.FileName != "")
                 {
                     writer.Write(createTableStr);
 
@@ -170,7 +213,7 @@ namespace Generador_X
 
                 Result = createTableStr + Result;
 
-                if (preview)
+                if (Preview)
                 {
                     PreviewForm PreviewFrm = new PreviewForm(Result);
                     PreviewFrm.ShowDialog();

@@ -218,7 +218,8 @@ namespace Generador_X
             this.PanelFormatoOpciones.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.PanelFormatoOpciones.Location = new System.Drawing.Point(327, 3);
             this.PanelFormatoOpciones.Name = "PanelFormatoOpciones";
-            this.PanelFormatoOpciones.Size = new System.Drawing.Size(450, 29);
+            this.PanelFormatoOpciones.Padding = new System.Windows.Forms.Padding(3);
+            this.PanelFormatoOpciones.Size = new System.Drawing.Size(450, 32);
             this.PanelFormatoOpciones.TabIndex = 6;
             // 
             // StackedPanel

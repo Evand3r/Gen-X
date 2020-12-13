@@ -87,6 +87,11 @@ namespace Generador_X
             }
         }
 
+        /// <summary>
+        /// Seleccionar panel al hacer click.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Panel_Click(object sender, EventArgs e)
         {
             if (FocusedControl == sender)
@@ -231,11 +236,16 @@ namespace Generador_X
         {
             if (ValidateFields())
             {
-                Generador Gen = new Generador(FieldPanels.ToArray(), (EOutputFormat)CBFormatoSalida.SelectedIndex, NumFilas, PanelFormatoOpciones);
-                Gen.Generate(true);
+                Generador Gen = new Generador(FieldPanels.ToArray(), (EOutputFormat)CBFormatoSalida.SelectedIndex, NumFilas, PanelFormatoOpciones, true);
+                Gen.Generate();
             }
         }
 
+        /// <summary>
+        /// Seleccionar formato de salida.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CBFormatoSalida_SelectedIndexChanged(object sender, EventArgs e)
         {
             PanelFormatoOpciones.SuspendLayout();
@@ -243,13 +253,18 @@ namespace Generador_X
 
             List<Control> opciones = new List<Control>();
 
-            switch (CBFormatoSalida.SelectedIndex)
+            switch (CBFormatoSalida.SelectedValue.ToString())
             {
-                case 0: //SQL
+                case "SQL":
                     Label lbl = new Label_("Nombre de la Tabla");
                     TextBox tbxTableName = new TextBox { Name = "TableName", Width = 120, Text = "GEN_X" };
-                    CheckBox ckbxCreateTable = new CheckBox { Name = "CreateTableCkBx", Text = "Incluir crear tabla", AutoSize = true };
+                    CheckBox ckbxCreateTable = new CheckB_("CreateTableCkBx", "Incluir crear tabla");
                     opciones.AddRange(new Control[] { lbl, tbxTableName, ckbxCreateTable });
+                    break;
+                case "JSON":
+                    CheckBox ckbxArrayJson = new CheckB_("JsonAsArray", "En Array");
+                    CheckBox ckbxIncluirNull = new CheckB_("IncludeNull", "Incluir valores nulos");
+                    opciones.AddRange(new Control[] { ckbxArrayJson, ckbxIncluirNull });
                     break;
                 default:
                     break;
