@@ -20,7 +20,7 @@ namespace Generador_X
         /// <summary>
         /// Instancia de faker.
         /// </summary>
-        private readonly Faker fkr = new Faker(Settings1.Default.Idioma);
+        private readonly Faker fkr = new Faker(Settings.Default.Idioma);
         /// <summary>
         /// Formatos de salida.
         /// </summary>
@@ -37,7 +37,7 @@ namespace Generador_X
         /// <summary>
         /// Valorn nulo por defecto.
         /// </summary>
-        private readonly string DefaultNullValue = Settings1.Default.NullValue;
+        private readonly string DefaultNullValue = Settings.Default.NullValue;
         /// <summary>
         /// Resultado de la generacion de datos.
         /// </summary>

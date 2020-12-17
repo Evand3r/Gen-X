@@ -184,8 +184,8 @@ namespace Generador_X
                     StackedPanel.Controls.SetChildIndex(p, indx + 1);
                 }
 
-                StackedPanel.ScrollControlIntoView(p);
                 StackedPanel.ResumeLayout();
+                StackedPanel.ScrollControlIntoView(p);
             }
         }
 

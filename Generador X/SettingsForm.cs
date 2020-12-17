@@ -21,10 +21,10 @@ namespace Generador_X
             CBLanguages.DisplayMember = "key";
             CBLanguages.ValueMember = "Value";
 
-            CBLanguages.SelectedItem = Languages.list.FirstOrDefault(x => x.Value == Settings1.Default.Idioma);
+            CBLanguages.SelectedItem = Languages.list.FirstOrDefault(x => x.Value == Settings.Default.Idioma);
             CBLanguages.SelectedIndexChanged += ValueChanged;
 
-            TBNullValue.Text = Settings1.Default.NullValue;
+            TBNullValue.Text = Settings.Default.NullValue;
             TBNullValue.TextChanged += ValueChanged;
         }
 
@@ -42,11 +42,11 @@ namespace Generador_X
 
         private void SaveChanges()
         {
-            Settings1.Default.Idioma = CBLanguages.SelectedValue.ToString();
-            Settings1.Default.NullValue = TBNullValue.Text.Trim();
+            Settings.Default.Idioma = CBLanguages.SelectedValue.ToString();
+            Settings.Default.NullValue = TBNullValue.Text.Trim();
 
             //Guardar configuracion entre sesiones.
-            Settings1.Default.Save();
+            Settings.Default.Save();
         }
 
         private void ValueChanged(object sender, EventArgs e)
