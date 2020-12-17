@@ -56,7 +56,6 @@ namespace Generador_X
             if(Settings.Default.SelectedCategory != null)
             {
                 SelectedLabel = Settings.Default.SelectedCategory;
-                //SelectedLabel.Invalidate();
                 FilterFields();
             }
 
@@ -86,9 +85,7 @@ namespace Generador_X
 
             if (SelectedLabel?.Text == label.Text)
             {
-                label.BackColor = SystemColors.Highlight;
-                label.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-                label.ForeColor = SystemColors.HighlightText;
+                SelectedLabel = label;
                 SelectedLabel.BackColor = SystemColors.Highlight;
                 SelectedLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
                 SelectedLabel.ForeColor = SystemColors.HighlightText;
@@ -107,9 +104,9 @@ namespace Generador_X
             //Deseleccionar el label
             if (SelectedLabel?.Text == label.Text)
             {
+                label.Invalidate();
                 SelectedLabel = null;
                 Settings.Default.SelectedCategory = null;
-                label.Invalidate();
             }
             //seleccionar el label
             else
