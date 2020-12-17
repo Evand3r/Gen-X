@@ -1,6 +1,7 @@
 ﻿using Generador_X.Controls;
 using Generador_X.Model;
 using Generador_X.Model.Enums;
+using Generador_X.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -52,6 +53,13 @@ namespace Generador_X
                 FlowCategoriesPanel.Controls.Add(lbl);
             }
 
+            if(Settings.Default.SelectedCategory != null)
+            {
+                SelectedLabel = Settings.Default.SelectedCategory;
+                //SelectedLabel.Invalidate();
+                FilterFields();
+            }
+
             ResumeLayout();
         }
 
@@ -76,8 +84,11 @@ namespace Generador_X
         {
             Label label = sender as Label;
 
-            if (SelectedLabel == label)
+            if (SelectedLabel?.Text == label.Text)
             {
+                label.BackColor = SystemColors.Highlight;
+                label.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+                label.ForeColor = SystemColors.HighlightText;
                 SelectedLabel.BackColor = SystemColors.Highlight;
                 SelectedLabel.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
                 SelectedLabel.ForeColor = SystemColors.HighlightText;
@@ -93,19 +104,24 @@ namespace Generador_X
         {
             Label label = (sender as Label);
 
-            if (SelectedLabel == label)
+            //Deseleccionar el label
+            if (SelectedLabel?.Text == label.Text)
             {
                 SelectedLabel = null;
+                Settings.Default.SelectedCategory = null;
                 label.Invalidate();
             }
+            //seleccionar el label
             else
             {
+                //En caso de hacer click a otro label
                 if (SelectedLabel != null)
                 {
                     SelectedLabel.Invalidate();
                 }
 
                 SelectedLabel = label;
+                Settings.Default.SelectedCategory = SelectedLabel;
                 SelectedLabel.Invalidate();
             }
 
@@ -122,7 +138,7 @@ namespace Generador_X
                 {
                     fsl.Visible = false;
                 }
-                else if(SelectedLabel != null && SelectedLabel.Tag.ToString() != fsl.CName)
+                else if(SelectedLabel != null && SelectedLabel?.Tag.ToString().Replace("_", " ") != fsl.CName)
                 {
                     fsl.Visible = false;
                 }

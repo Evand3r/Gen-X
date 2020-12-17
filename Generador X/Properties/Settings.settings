@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Generador_X.Properties" GeneratedClassName="Settings1">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Generador_X.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="Idioma" Type="System.String" Scope="User">
@@ -7,6 +7,9 @@
     </Setting>
     <Setting Name="NullValue" Type="System.String" Scope="User">
       <Value Profile="(Default)">Null</Value>
+    </Setting>
+    <Setting Name="SelectedCategory" Type="System.Windows.Forms.Label" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>
