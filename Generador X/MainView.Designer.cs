@@ -227,7 +227,7 @@ namespace Generador_X
             // StackedPanel
             // 
             this.StackedPanel.AutoScroll = true;
-            this.StackedPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.StackedPanel.BackColor = System.Drawing.SystemColors.Control;
             this.StackedPanel.Controls.Add(this.panel3);
             this.StackedPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.StackedPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;

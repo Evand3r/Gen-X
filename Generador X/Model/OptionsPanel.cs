@@ -219,7 +219,10 @@ namespace Generador_X.Model
             if (Nulls > 0)
             {
                 //Quitar las comillas de los valore nulos.
-                result = result.ConvertAll(p => p == $"'{NullValue}'" ? "Null" : p);
+                if (q != "")
+                {
+                    result = result.ConvertAll(p => p == $"{q}{NullValue}{q}" ? "Null" : p);
+                }
             }
 
             return result.ToArray();

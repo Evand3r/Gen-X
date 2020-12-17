@@ -31,7 +31,7 @@ namespace Generador_X.Model.Enums
         Compañia,
         Base_de_Datos,
         Finanzas,
-        Informatica,
+        Lenguaje,
         Internet,
         Lorem,
         Telefono,
@@ -307,7 +307,7 @@ namespace Generador_X.Model.Enums
         Bic,
         Iban,
         #endregion
-        #region \Idioma
+        #region \Lenguaje
         Abreviatura,
         Adjetivo,
         Sustantivo,
@@ -341,21 +341,22 @@ namespace Generador_X.Model.Enums
         Palabra,
         Palabras,
         Letra,
-        Frases,
+        Oracion,
+        Oraciones,
         Parrafo,
         Parrafos,
         Texto,
         Lineas,
         Ficha,
         #endregion
-        #region \Phone
+        #region \Telefono
         Numero_Telefono,
         Formato_Numero_Telefono,
         #endregion
-        #region \Rant
+        #region \Discuro
         Reseña,
         #endregion
-        #region \System
+        #region \Sistema
         Nombre_Archivo,
         Ruta_Directorio,
         Ruta_Archivo,
@@ -368,13 +369,13 @@ namespace Generador_X.Model.Enums
         ApplePushToken,
         Pin_BlackBerry,
         #endregion
-        #region \Vehicle
+        #region \Vehiculo
         Vin,
         Fabricante,
         Modelo,
         Combustible,
         #endregion
-        #region \Random
+        #region \Aleatorio
         Numero, //opc max o min max
         Digitos,
         Par,
@@ -399,7 +400,7 @@ namespace Generador_X.Model.Enums
         Replace,
         Guid,
         Uuid,
-        AlfaNumeric,
+        AlfaNumerico,
         Hexadecimal,
         #endregion
     }
