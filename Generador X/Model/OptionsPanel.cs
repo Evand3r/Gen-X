@@ -36,6 +36,7 @@ namespace Generador_X.Model
         public int Value = 1;
         private EBCategory? EBCat;
         private EBFieldType? EBFld;
+        private bool Error = false;
 
 
         //Cantidad de campos nulos, tomar de NullsCount TextBox
@@ -62,61 +63,15 @@ namespace Generador_X.Model
             EBFld = ebfld;
         }
 
-        //public virtual string[] Generate(Faker fkr, int n, string q = "", string NullValue = "Null")
-        //{
-        //    IEnumerable<string>? value = null;
-        //    try
-        //    {
-
-        //        if (EBFld == EBFieldType.Hash)
-        //        {
-        //            value = Enumerable.Range(1, n)
-        //                .Select(_ => (q + fkr.Random.Hash(40).ToString() + q).OrDefault(fkr, Nulls, NullValue));
-        //        }
-        //        else if (EBFld == EBFieldType.BoolDB)
-        //        {
-        //            value = Enumerable.Range(1, n)
-        //                .Select(_ => fkr.PickRandom(1, 0).ToString().OrDefault(fkr, Nulls, NullValue));
-        //        }
-        //        else if (EBFld == EBFieldType.Bool)
-        //        {
-        //            value = Enumerable.Range(1, n)
-        //                .Select(_ => fkr.Random.Bool().ToString().OrDefault(fkr, Nulls, NullValue));
-        //        }
-        //        else if (EBCat != null && EBFld != null)
-        //        {
-        //            string parseStr = q + "{{" + $"{EBCat?.ToString().ToLower()}.{EBFld?.ToString().ToLower()}" + "}}" + q;
-
-        //            value = Enumerable.Range(1, n)
-        //                .Select(_ => fkr.Parse(parseStr).OrDefault(fkr, Nulls, NullValue).ToString());
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        if (e.Message.StartsWith("Unknown method"))
-        //        {
-        //            ErrorHandler.ShowMessage($"El idioma actualmente seleccionado no soporta el tipo de dato {FieldTypes.Types.FirstOrDefault(p => p.Value.BName == EBFld).Value.SearchName}");
-        //        }
-        //        else
-        //        {
-        //            ErrorHandler.ShowMessage("Ha ocurrido un error inesperado.", MessageType.error);
-        //        }
-        //    }
-
-        //    Si el array esta vacio llenarlo de null value o string
-        //    if (value?.Count() == 0 || value == null)
-        //    {
-        //        value = Enumerable.Repeat(NullValue.Length > 0 ? NullValue : string.Empty, n).ToArray();
-        //    }
-
-        //    return value.ToArray();
-        //}
-
         public virtual string Generate(Faker fkr, int n, string q = "", string NullValue = "Null")
         {
             string? value = null;
             try
             {
+                if(Error)
+                {
+                    return "";
+                }
 
                 if (EBFld == EBFieldType.Hash)
                 {
@@ -139,13 +94,18 @@ namespace Generador_X.Model
             }
             catch (Exception e)
             {
-                if (e.Message.StartsWith("Unknown method"))
+                if (e.Message.StartsWith("Unknown method") && !Error)
                 {
                     ErrorHandler.ShowMessage($"El idioma actualmente seleccionado no soporta el tipo de dato {FieldTypes.Types.FirstOrDefault(p => p.Value.BName == EBFld).Value.SearchName}");
+                    Error = true;
                 }
                 else
                 {
-                    ErrorHandler.ShowMessage("Ha ocurrido un error inesperado.", MessageType.error);
+                    if (!Error)
+                    {
+                        ErrorHandler.ShowMessage("Ha ocurrido un error inesperado.", MessageType.error);
+                        Error = true;
+                    }
                 }
             }
 
@@ -160,6 +120,7 @@ namespace Generador_X.Model
         public void ResetCount()
         {
             Value = 1;
+            Error = false;
         }
     }
 
@@ -168,35 +129,6 @@ namespace Generador_X.Model
     /// </summary>
     class RowNumberOptionsType : BaseOptionsType
     {
-        //public override string[] Generate(Faker fkr, int n, string q = "", string NullValue = "Null")
-        //{
-        //    int Value = 1;
-        //    string[] a = new string[n];
-
-        //    if (Nulls == 0)
-        //    {
-        //        var arr = Enumerable.Range(1, n).ToArray();
-        //        a = Array.ConvertAll(arr, b => b.ToString());
-        //    }
-        //    else
-        //    {
-        //        for (int b = 0; b < a.Length; b++)
-        //        {
-        //            if (fkr.PickRandom(true, false).OrDefault(fkr, Nulls, false))
-        //            {
-        //                a[b] = Value.ToString();
-        //            }
-        //            else
-        //            {
-        //                a[b] = NullValue;
-        //            }
-
-        //            Value++;
-        //        }
-        //    }
-
-        //    return a;
-        //}
         public override string Generate(Faker fkr, int n, string q = "", string NullValue = "Null")
         {
             //int Value = 1;
@@ -280,24 +212,6 @@ namespace Generador_X.Model
             panelControls.InsertRange(0, new Control[] { DTFrom, lblto, DTTo, lblfmt, CBDateFormats });
         }
 
-        //public override string[] Generate(Faker fkr, int n, string q = "", string NullValue = "Null")
-        //{
-        //    List<string> result = Enumerable.Range(1, n)
-        //        .Select(_ => q + fkr.Date.Between(DTFrom.Value, DTTo.Value).ToString(SelectedFormat).OrDefault(fkr, Nulls, NullValue) + q)
-        //        .ToList();
-
-        //    if (Nulls > 0)
-        //    {
-        //        //Quitar las comillas de los valore nulos.
-        //        if (q != "")
-        //        {
-        //            result = result.ConvertAll(p => p == $"{q}{NullValue}{q}" ? "Null" : p);
-        //        }
-        //    }
-
-        //    return result.ToArray();
-        //}
-
         public override string Generate(Faker fkr, int n, string q = "", string NullValue = "Null")
         {
             string result = (q + fkr.Date.Between(DTFrom.Value, DTTo.Value).ToString(SelectedFormat) + q).OrDefault(fkr, Nulls, NullValue);
@@ -320,6 +234,18 @@ namespace Generador_X.Model
         TextBox? TBMin;
         TextBox? TBMax;
         TextBox? TBDec;
+        public int Dec
+        {
+            get
+            {
+                _ = int.TryParse(TBDec?.Text, out int tmp);
+                if (TBDec != null)
+                {
+                    TBDec.Text = tmp.ToString();
+                }
+                return tmp;
+            }
+        }
         private int Min
         {
             get
@@ -346,18 +272,6 @@ namespace Generador_X.Model
                 return tmp;
             }
         }
-        private int Dec
-        {
-            get
-            {
-                _ = int.TryParse(TBDec?.Text, out int tmp);
-                if (TBDec != null)
-                {
-                    TBDec.Text = tmp.ToString();
-                }
-                return tmp;
-            }
-        }
 
         private EBCategory EBCat;
         private EBFieldType EBFld;
@@ -380,49 +294,17 @@ namespace Generador_X.Model
             }
         }
 
-        //public override string[] Generate(Faker fkr, int n, string q = "", string NullValue = "Null")
-        //{
-        //    string q_ = q;
-
-        //    if (!Settings.Default.QuotesInNumbers)
-        //    {
-        //        q_ = "";
-        //    }
-
-        //    IEnumerable<string> values;
-
-        //    if (EBFld == EBFieldType.Number)
-        //    {
-        //        values = Enumerable.Range(1, n)
-        //            .Select(_ => (q_ + Math.Round(fkr.Random.Float(Min, Max), Dec).ToString() + q_).OrDefault(fkr, Nulls, NullValue));
-        //    }
-        //    else
-        //    {
-        //        values = Enumerable.Range(1, n)
-        //            .Select(_ => fkr.Parse(q_ + "{{" + $"{EBCat}.{EBFld}" + "}}" + q_).ToString().OrDefault(fkr, Nulls, NullValue));
-        //    }
-
-        //    return values.ToArray();
-        //}
-
         public override string Generate(Faker fkr, int n, string q = "", string NullValue = "Null")
         {
-            string q_ = q;
-
-            if (!Settings.Default.QuotesInNumbers)
-            {
-                q_ = "";
-            }
-
             string values;
 
             if (EBFld == EBFieldType.Number)
             {
-                values = (q_ + Math.Round(fkr.Random.Float(Min, Max), Dec).ToString() + q_).OrDefault(fkr, Nulls, NullValue);
+                values = Math.Round(fkr.Random.Float(Min, Max), Dec).ToString().OrDefault(fkr, Nulls, NullValue);
             }
             else
             {
-                values = fkr.Parse(q_ + "{{" + $"{EBCat}.{EBFld}" + "}}" + q_).ToString().OrDefault(fkr, Nulls, NullValue);
+                values = fkr.Parse("{{" + $"{EBCat}.{EBFld}" + "}}").ToString().OrDefault(fkr, Nulls, NullValue);
             }
 
             return values;
