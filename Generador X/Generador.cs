@@ -43,7 +43,7 @@ namespace Generador_X
         /// </summary>
         private string Result;
         private readonly bool Preview;
-        private readonly string identation = "    ";
+        private readonly string identation = "    "; //4 spaces
         private SaveFileDialog Save;
         private StreamWriter Writer = null;
 
@@ -105,6 +105,7 @@ namespace Generador_X
             }
             finally
             {
+                Fields.ForEach(f => f.OptionsPanel.Options.ResetCount());
                 Cursor.Current = Cursors.Default;
                 if (Writer != null)
                 {
@@ -119,12 +120,11 @@ namespace Generador_X
             //Get options
             bool includeHeader = (Options.Controls.Find("IncludeHeader", true)[0] as CheckBox).Checked;
             string outputExt = OutputFormat.ToString();
+            DialogResult SaveResult = DialogResult.OK;
             string delimiter = OutputFormat == EOutputFormat.CSV ? "," : "\t";
             string columns = "";
             string values = "";
             string valuesLine = "";
-            List<string[]> valuesArr = new List<string[]>();
-            valuesArr.AddRange(Fields.ConvertAll(p => p.OptionsPanel.Options.Generate(fkr, Convert.ToInt32(Lines), "", "")).ToArray());
 
             if (!Preview)
             {
@@ -132,8 +132,8 @@ namespace Generador_X
                 Save.Title = $"Guardar archivo {OutputFormat}";
                 //Nombre del archivo por defecto.
                 Save.FileName = $"GEN_X.{outputExt.ToLower()}";
-                Save.ShowDialog();
-                Writer = new StreamWriter(Save.OpenFile());
+                SaveResult = Save.ShowDialog();
+                Writer = SaveResult == DialogResult.OK ? new StreamWriter(Save.OpenFile()) : null;
             }
 
             for (int i = 0; i < Fields.Count; i++)
@@ -159,7 +159,7 @@ namespace Generador_X
                 values += (i != 0 ? delimiter : "") + "{" + i + "}";
             }
 
-            if (!Preview && Save.FileName != "")
+            if (!Preview && SaveResult == DialogResult.OK && Save.FileName != "")
             {
                 if (includeHeader)
                 {
@@ -168,7 +168,8 @@ namespace Generador_X
 
                 for (int i = 0; i < Lines; i++)
                 {
-                    valuesLine = string.Format(values, valuesArr.ConvertAll(p => p[i]).ToArray());
+                    var str = Fields.ConvertAll(p => p.OptionsPanel.Options.Generate(fkr, Convert.ToInt32(Lines), "", DefaultNullValue)).ToArray();
+                    valuesLine = string.Format(values, str);
                     Writer.WriteLine(valuesLine);
                 }
                 Writer.Dispose();
@@ -183,7 +184,8 @@ namespace Generador_X
 
                 for (int i = 0; i < Lines; i++)
                 {
-                    valuesLine = string.Format(values, valuesArr.ConvertAll(p => p[i]).ToArray());
+                    var str = Fields.ConvertAll(p => p.OptionsPanel.Options.Generate(fkr, Convert.ToInt32(Lines), "", DefaultNullValue)).ToArray();
+                    valuesLine = string.Format(values, str);
                     Result += valuesLine + nl;
                 }
 
@@ -198,11 +200,10 @@ namespace Generador_X
             bool asArray = (Options.Controls.Find("JsonAsArray", true)[0] as CheckBox).Checked;
             bool includeNull = (Options.Controls.Find("IncludeNull", true)[0] as CheckBox).Checked;
 
+            DialogResult SaveResult = DialogResult.OK;
             string baseJsonStr = "\"+\": -";
             string JsonLine = "{_}" + (asArray ? "," : "");
             string tmp = "";
-            List<string[]> valuesArr = new List<string[]>();
-            valuesArr.AddRange(Fields.ConvertAll(p => p.OptionsPanel.Options.Generate(fkr, Convert.ToInt32(Lines), "\"", DefaultNullValue)).ToArray());
 
             if (!Preview)
             {
@@ -210,8 +211,8 @@ namespace Generador_X
                 Save.Title = "Guardar archivo JSON";
                 //Nombre del archivo por defecto.
                 Save.FileName = "GEN_X.json";
-                Save.ShowDialog();
-                Writer = new StreamWriter(Save.OpenFile());
+                SaveResult = Save.ShowDialog();
+                Writer = SaveResult == DialogResult.OK ? new StreamWriter(Save.OpenFile()) : null;
             }
 
             Result = (asArray ? "[" : "");
@@ -222,18 +223,20 @@ namespace Generador_X
                 for (int j = 0; j < Fields.Count; j++)
                 {
                     FieldPanel p = Fields.ElementAt(j);
+                    var str = p.OptionsPanel.Options.Generate(fkr, Convert.ToInt32(Lines), "\'", DefaultNullValue);
 
-                    if (includeNull || valuesArr[j][i] != DefaultNullValue)
+                    if (includeNull || str != DefaultNullValue)
                     {
+
                         tmp += (asArray ? identation : "") +
-                            baseJsonStr.Replace("+", p.FieldName).Replace("-", valuesArr[j][i] + ",") +
+                            baseJsonStr.Replace("+", p.FieldName).Replace("-", str + ",") +
                             (asArray && j + 1 != Fields.Count ? nl : "");
                     }
                 }
 
                 tmp = !tmp.Equals(string.Empty) || !asArray ? (asArray ? nl : "") + tmp.TrimEnd(',') + (!asArray ? "" : nl) : nl;
 
-                if (!Preview)
+                if (!Preview && SaveResult == DialogResult.OK && Save.FileName != "")
                 {
                     string line = (asArray && i == 0 ? "[" : "") + JsonLine.Replace("_", tmp);
 
@@ -267,7 +270,6 @@ namespace Generador_X
             string columns = "";
             string values = "";
             string valuesChanged = "";
-            List<string[]> valuesArr = new List<string[]>();
 
             if (!Preview)
             {
@@ -275,8 +277,6 @@ namespace Generador_X
                 Save.Title = "Guardar script SQL";
                 //Nombre del archivo por defecto.
                 Save.FileName = tableName == "" ? "GEN_X.sql" : tableName + ".sql";
-                Save.ShowDialog();
-                Writer = new StreamWriter(Save.OpenFile());
             }
 
             //Añadir el create table
@@ -304,15 +304,17 @@ namespace Generador_X
             SQLLine = SQLLine.Replace("+", columns);
             SQLLine = SQLLine.Replace("__", tableName);
 
-            valuesArr.AddRange(Fields.ConvertAll(p => p.OptionsPanel.Options.Generate(fkr, Convert.ToInt32(Lines), "\'", DefaultNullValue)).ToArray());
+            //valuesArr.AddRange(Fields.ConvertAll(p => p.OptionsPanel.Options.Generate(fkr, Convert.ToInt32(Lines), "\'", DefaultNullValue)).ToArray());
 
-            if (!Preview && Save.FileName != "")
+            if (!Preview && Save.ShowDialog() == DialogResult.OK && Save.FileName != "")
             {
+                Writer = new StreamWriter(Save.OpenFile());
                 Writer.Write(createTableStr);
 
                 for (int i = 0; i < Lines; i++)
                 {
-                    valuesChanged = string.Format(values, valuesArr.ConvertAll(p => p[i]).ToArray());
+                    var str = Fields.ConvertAll(p => p.OptionsPanel.Options.Generate(fkr, Convert.ToInt32(Lines), "\'", DefaultNullValue)).ToArray();
+                    valuesChanged = string.Format(values, str);
                     Writer.WriteLine($"{SQLLine.Replace("-", valuesChanged)}");
                 }
                 Writer.Dispose();
@@ -322,8 +324,9 @@ namespace Generador_X
             {
                 for (int i = 0; i < Lines; i++)
                 {
+                    var str = Fields.ConvertAll(p => p.OptionsPanel.Options.Generate(fkr, Convert.ToInt32(Lines), "\'", DefaultNullValue)).ToArray();
                     //Sustituir {i} por sus correspondientes valores
-                    valuesChanged = string.Format(values, valuesArr.ConvertAll(p => p[i]).ToArray());
+                    valuesChanged = string.Format(values, str);
                     Result += $"{SQLLine.Replace("-", valuesChanged)}{nl}";
                 }
             }

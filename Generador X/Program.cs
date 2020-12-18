@@ -20,13 +20,6 @@ namespace Generador_X
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainView());
-
-            //Faker fkr = new Faker();
-
-            //var a = fkr.Parse("{{finance.currency}}");
-            //var b = fkr.Finance.Currency();
-            //var c = new Bogus.DataSets.Finance();
-            //var d = c.Currency();
         }
     }
 }
