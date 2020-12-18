@@ -57,17 +57,5 @@ namespace Generador_X.Properties {
                 this["SelectedCategory"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool QuotesInNumbers {
-            get {
-                return ((bool)(this["QuotesInNumbers"]));
-            }
-            set {
-                this["QuotesInNumbers"] = value;
-            }
-        }
     }
 }
