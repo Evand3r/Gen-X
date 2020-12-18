@@ -36,6 +36,10 @@ namespace Generador_X.Controls
                 Location = new Point(-1, -1),
             };
 
+            //Redirigir click en labels al panel de tipo de campo.
+            labelExmples.Click += new EventHandler((object o, EventArgs e) => InvokeOnClick(this, e));
+            labelTitle.Click += new EventHandler((object o, EventArgs e) => InvokeOnClick(this, e));
+
             FName = field.SearchName.ToString().Replace("_", " ").ToLower();
             CName = field.SearchCategoryName.ToString().Replace("_", " ");
 
