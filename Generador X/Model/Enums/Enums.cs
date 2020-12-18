@@ -201,25 +201,26 @@ namespace Generador_X.Model.Enums
         Fuel,
         //Random
         Number,
-        Digits,
-        Even,
-        Odd,
-        Double,
-        Decimal,
-        Float,
-        Byte,
-        Bytes,
-        SByte,
-        Int,
-        UInt,
-        ULong,
-        Long,
-        Short,
-        UShort,
-        Char,
-        Chars,
-        String,
+        //Digits,
+        //Even,
+        //Odd,
+        //Double,
+        //Decimal,
+        //Float,
+        //Byte,
+        //Bytes,
+        //SByte,
+        //Int,
+        //UInt,
+        //ULong,
+        //Long,
+        //Short,
+        //UShort,
+        //Char,
+        //Chars,
+        //String,
         Hash,
+        BoolDB,
         Bool,
         Replace,
         Guid,
@@ -377,26 +378,27 @@ namespace Generador_X.Model.Enums
         #endregion
         #region \Aleatorio
         Numero, //opc max o min max
-        Digitos,
-        Par,
-        Impar,
-        Double,
-        Decimal,
-        Flotante,
-        Byte,
-        Bytes,
-        SByte,
-        Int, //opc min max
-        UInt, //'
-        ULong,
-        Long, //'
-        Short, //'
-        UShort, //'
-        Caracter, //'
-        Caracteres, //'
-        Cadena, //opc length(int)
+        //Digitos,
+        //Par,
+        //Impar,
+        //Double,
+        //Decimal,
+        //Flotante,
+        //Byte,
+        //Bytes,
+        //SByte,
+        //Int, //opc min max
+        //UInt, //'
+        //ULong,
+        //Long, //'
+        //Short, //'
+        //UShort, //'
+        //Caracter, //'
+        //Caracteres, //'
+        //Cadena, //opc length(int)
         Hash,
-        Bool,
+        Booleano_DB,
+        Booleano,
         Replace,
         Guid,
         Uuid,

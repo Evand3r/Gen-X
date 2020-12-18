@@ -54,17 +54,12 @@ namespace Generador_X.Controls
                     return new OptionsDateType();
                 case EBFieldType.Time:
                     return new OptionsDateType(EBFieldType.Time);
-                case EBFieldType.FirstName:
-                case EBFieldType.FullName:
-                    return new OptionsName(type);
-                //case EBFieldType.Email:
-                //    break;
                 //case EBFieldType.ExampleEmail:
                 //    break;
-                //case EBFieldType.UserName:
-                //    break;
-                //case EBFieldType.DomainName:
-                //    break;
+                case EBFieldType.Number:
+                case EBFieldType.Latitude:
+                case EBFieldType.Longitude:
+                    return new OptionsNumberType(ftype.BCategoryName, ftype.BName);
                 case EBFieldType.id:
                     return new RowNumberOptionsType();
                 default:
