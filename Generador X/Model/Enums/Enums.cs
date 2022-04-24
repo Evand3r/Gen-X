@@ -13,9 +13,9 @@ namespace Generador_X.Model.Enums
         JSON,
         CSV,
         TSV,
-        Excel,
-        XML,
-        Personalizado,
+        //Excel,
+        //XML,
+        //Personalizado,
     }
 
     /// <summary>

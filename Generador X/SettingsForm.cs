@@ -27,7 +27,6 @@ namespace Generador_X
             TBNullValue.Text = Settings.Default.NullValue;
             TBNullValue.TextChanged += ValueChanged;
 
-            CkBxQuotesInNumbers.Checked = Settings.Default.QuotesInNumbers;
         }
 
         private void BTNAplicar_Click(object sender, EventArgs e)
@@ -46,7 +45,6 @@ namespace Generador_X
         {
             Settings.Default.Idioma = CBLanguages.SelectedValue.ToString();
             Settings.Default.NullValue = TBNullValue.Text.Trim();
-            Settings.Default.QuotesInNumbers = CkBxQuotesInNumbers.Checked;
 
             //Guardar configuracion entre sesiones.
             Settings.Default.Save();

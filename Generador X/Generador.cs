@@ -8,6 +8,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Microsoft.Office.Interop.Excel;
+using _Excel = Microsoft.Office.Interop.Excel;
+using CheckBox = System.Windows.Forms.CheckBox;
+using TextBox = System.Windows.Forms.TextBox;
+using Generador_X.Model;
 
 namespace Generador_X
 {
@@ -72,7 +77,8 @@ namespace Generador_X
             Save = new SaveFileDialog();
 
             Cursor.Current = Cursors.WaitCursor;
-            Application.DoEvents();
+            //https://stackoverflow.com/questions/1568557/how-can-i-make-the-cursor-turn-to-the-wait-cursor
+            System.Windows.Forms.Application.DoEvents();
 
             try
             {
@@ -88,12 +94,12 @@ namespace Generador_X
                     case EOutputFormat.TSV:
                         GenerateCSVTSV();
                         break;
-                    case EOutputFormat.Excel:
-                        break;
-                    case EOutputFormat.XML:
-                        break;
-                    case EOutputFormat.Personalizado:
-                        break;
+                    //case EOutputFormat.Excel:
+                    //    GenerateExcel();
+                    //    break;
+                    //case EOutputFormat.XML:
+                    //    break;
+                    //case EOutputFormat.Personalizado:
                     default:
                         break;
                 }
@@ -203,7 +209,7 @@ namespace Generador_X
             DialogResult SaveResult = DialogResult.OK;
             string baseJsonStr = "\"+\": -";
             string JsonLine = "{_}" + (asArray ? "," : "");
-            string tmp = "";
+            string tmp;
 
             if (!Preview)
             {
@@ -223,7 +229,7 @@ namespace Generador_X
                 for (int j = 0; j < Fields.Count; j++)
                 {
                     FieldPanel p = Fields.ElementAt(j);
-                    var str = p.OptionsPanel.Options.Generate(fkr, Convert.ToInt32(Lines), "\'", DefaultNullValue);
+                    var str = p.OptionsPanel.Options.Generate(fkr, Convert.ToInt32(Lines), "\"", DefaultNullValue);
 
                     if (includeNull || str != DefaultNullValue)
                     {
@@ -283,14 +289,22 @@ namespace Generador_X
             if ((Options.Controls.Find("CreateTableCkBx", true)[0] as CheckBox).Checked)
             {
                 createTableStr = $"CREATE TABLE {tableName} ({nl}";
-                Fields.ForEach(f => createTableStr += '\t' + $"{f.TBFieldName.Text} {f.FieldType.ColumnType},{nl}");
+                Fields.ForEach(f =>
+                {
+                    if (f.FieldType.BName == EBFieldType.Number)
+                    {
+                        int dec = (f.OptionsPanel.Options as OptionsNumberType).Dec;
+                        f.FieldType.ColumnType = dec == 0 ? "INT" : $"DECIMAL(5, {dec})";
+                    }
+                    createTableStr += '\t' + $"{f.TBFieldName.Text} {f.FieldType.ColumnType},{nl}";
+                });
                 createTableStr += ");" + nl;
             }
 
             for (var i = 0; i <= Fields.Count - 1; i++)
             {
-                columns += (i != 0 ? " " : "") + "{" + i + "},";
-                values += (i != 0 ? " " : "") + "{" + i + "},";
+                columns += (i != 0 ? " " : "") + $"{{{i}}},";
+                values += (i != 0 ? " " : "") + $"{{{i}}},";
             }
 
             //Remover la ultima coma.

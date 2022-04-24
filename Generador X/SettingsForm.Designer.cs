@@ -36,7 +36,6 @@ namespace Generador_X
             this.BTNAplicar = new System.Windows.Forms.Button();
             this.BTNCancelar = new System.Windows.Forms.Button();
             this.BTNOK = new System.Windows.Forms.Button();
-            this.CkBxQuotesInNumbers = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -104,24 +103,11 @@ namespace Generador_X
             this.BTNOK.Text = "OK";
             this.BTNOK.UseVisualStyleBackColor = true;
             this.BTNOK.Click += new System.EventHandler(this.BTNOK_Click);
-            // 
-            // CkBxQuotesInNumbers
-            // 
-            this.CkBxQuotesInNumbers.AutoSize = true;
-            this.CkBxQuotesInNumbers.Location = new System.Drawing.Point(144, 102);
-            this.CkBxQuotesInNumbers.Name = "CkBxQuotesInNumbers";
-            this.CkBxQuotesInNumbers.Size = new System.Drawing.Size(145, 19);
-            this.CkBxQuotesInNumbers.TabIndex = 4;
-            this.CkBxQuotesInNumbers.Text = "Números con comillas";
-            this.CkBxQuotesInNumbers.UseVisualStyleBackColor = true;
-            this.CkBxQuotesInNumbers.CheckedChanged += new System.EventHandler(this.ValueChanged);
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(288, 206);
-            this.Controls.Add(this.CkBxQuotesInNumbers);
             this.Controls.Add(this.BTNOK);
             this.Controls.Add(this.BTNCancelar);
             this.Controls.Add(this.BTNAplicar);
@@ -146,6 +132,5 @@ namespace Generador_X
         private System.Windows.Forms.Button BTNAplicar;
         private System.Windows.Forms.Button BTNCancelar;
         private System.Windows.Forms.Button BTNOK;
-        private System.Windows.Forms.CheckBox CkBxQuotesInNumbers;
     }
 }

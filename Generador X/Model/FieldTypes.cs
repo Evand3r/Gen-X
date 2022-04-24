@@ -116,7 +116,7 @@ namespace Generador_X.Model
             #endregion
             #region Lorem
             {EFieldName.Palabra, new FieldType("Palabra", "VARCHAR(80)", EFieldName.Palabra, ECategory.Lorem, EBCategory.Lorem, EBFieldType.Word, " \n\r \n\r ") },
-            {EFieldName.Palabras, new FieldType("Palabras", "VARCHAR(80)", EFieldName.Palabras, ECategory.Lorem, EBCategory.Lorem, EBFieldType.Words, " \n\r \n\r ") },
+            //{EFieldName.Palabras, new FieldType("Palabras", "VARCHAR(80)", EFieldName.Palabras, ECategory.Lorem, EBCategory.Lorem, EBFieldType.Words, " \n\r \n\r ") },
             {EFieldName.Letra, new FieldType("Letra", "VARCHAR(80)", EFieldName.Letra, ECategory.Lorem, EBCategory.Lorem, EBFieldType.Letter, " \n\r \n\r ") },
             {EFieldName.Oracion, new FieldType("Oracion", "VARCHAR(80)", EFieldName.Oracion, ECategory.Lorem, EBCategory.Lorem, EBFieldType.Sentence, " \n\r \n\r ") },
             {EFieldName.Oraciones, new FieldType("Oraciones", "VARCHAR(80)", EFieldName.Oraciones, ECategory.Lorem, EBCategory.Lorem, EBFieldType.Sentences, " \n\r \n\r ") },
@@ -153,33 +153,10 @@ namespace Generador_X.Model
             {EFieldName.Combustible, new FieldType("Combustible", "VARCHAR(80)", EFieldName.Combustible, ECategory.Vehiculo, EBCategory.Vehicle, EBFieldType.Fuel, " \n\r \n\r ") },
             #endregion
             #region Random
-            {EFieldName.Numero, new FieldType("Numero", "VARCHAR(80)", EFieldName.Numero,  ECategory.Aleatorio, EBCategory.Random, EBFieldType.Number, " \n\r \n\r ") },
-            //{EFieldName.Digitos, new FieldType("Digitos", "VARCHAR(80)", EFieldName.Digitos, ECategory.Aleatorio, EBCategory.Random, EBFieldType.Digits, " \n\r \n\r ") },
-            //{EFieldName.Par, new FieldType("Par", "VARCHAR(80)", EFieldName.Par, ECategory.Aleatorio, EBCategory.Random, EBFieldType.Even, " \n\r \n\r ") },
-            //{EFieldName.Impar, new FieldType("Impar", "VARCHAR(80)", EFieldName.Impar, ECategory.Aleatorio, EBCategory.Random, EBFieldType.Odd, " \n\r \n\r ") },
-            //{EFieldName.Double, new FieldType("Double", "VARCHAR(80)", EFieldName.Double, ECategory.Aleatorio, EBCategory.Random, EBFieldType.Double, " \n\r \n\r ") },
-            //{EFieldName.Decimal, new FieldType("Decimal", "VARCHAR(80)", EFieldName.Decimal, ECategory.Aleatorio, EBCategory.Random, EBFieldType.Decimal, " \n\r \n\r ") },
-            //{EFieldName.Flotante, new FieldType("Flotante", "VARCHAR(80)", EFieldName.Flotante, ECategory.Aleatorio, EBCategory.Random, EBFieldType.Float, " \n\r \n\r ") },
-            //{EFieldName.Byte, new FieldType("Byte", "VARCHAR(80)", EFieldName.Byte, ECategory.Aleatorio, EBCategory.Random, EBFieldType.Byte, " \n\r \n\r ") },
-            //{EFieldName.Bytes, new FieldType("Bytes", "VARCHAR(80)", EFieldName.Bytes, ECategory.Aleatorio, EBCategory.Random, EBFieldType.Bytes, " \n\r \n\r ") },
-            //{EFieldName.SByte, new FieldType("SByte", "VARCHAR(80)", EFieldName.SByte, ECategory.Aleatorio, EBCategory.Random, EBFieldType.SByte, " \n\r \n\r ") },
-            //{EFieldName.Int, new FieldType("Int", "VARCHAR(80)", EFieldName.Int,  ECategory.Aleatorio, EBCategory.Random, EBFieldType.Int, " \n\r \n\r ") },
-            //{EFieldName.UInt, new FieldType("UInt", "VARCHAR(80)", EFieldName.UInt,  ECategory.Aleatorio, EBCategory.Random, EBFieldType.UInt, " \n\r \n\r ") },
-            //{EFieldName.ULong, new FieldType("ULong", "VARCHAR(80)", EFieldName.ULong, ECategory.Aleatorio, EBCategory.Random, EBFieldType.ULong, " \n\r \n\r ") },
-            //{EFieldName.Long, new FieldType("Long", "VARCHAR(80)", EFieldName.Long,  ECategory.Aleatorio, EBCategory.Random, EBFieldType.Long, " \n\r \n\r ") },
-            //{EFieldName.Short, new FieldType("Short", "VARCHAR(80)", EFieldName.Short,  ECategory.Aleatorio, EBCategory.Random, EBFieldType.Short, " \n\r \n\r ") },
-            //{EFieldName.UShort, new FieldType("UShort", "VARCHAR(80)", EFieldName.UShort,  ECategory.Aleatorio, EBCategory.Random, EBFieldType.UShort, " \n\r \n\r ") },
-            //{EFieldName.Caracter, new FieldType("Caracter", "VARCHAR(80)", EFieldName.Caracter,  ECategory.Aleatorio, EBCategory.Random, EBFieldType.Char, " \n\r \n\r ") },
-            //{EFieldName.Caracteres, new FieldType("Caracteres", "VARCHAR(80)", EFieldName.Caracteres,  ECategory.Aleatorio, EBCategory.Random, EBFieldType.Chars, " \n\r \n\r ") },
-            //{EFieldName.Cadena, new FieldType("Cadena", "VARCHAR(80)", EFieldName.Cadena,  ECategory.Aleatorio, EBCategory.Random, EBFieldType.String, " \n\r \n\r ") },
+            {EFieldName.Numero, new FieldType("Numero", "INT", EFieldName.Numero,  ECategory.Aleatorio, EBCategory.Random, EBFieldType.Number, " \n\r \n\r ") },
             {EFieldName.Hash, new FieldType("Hash", "VARCHAR(40)", EFieldName.Hash, ECategory.Aleatorio, EBCategory.Random, EBFieldType.Hash, "caa91af303ffaa575b63874fd4bfd302b498a3a3") },
             {EFieldName.Booleano_DB, new FieldType("Bool", "BIT", EFieldName.Booleano_DB, ECategory.Aleatorio, EBCategory.Random, EBFieldType.BoolDB, "1\n\r0\n\rNull") },
             {EFieldName.Booleano, new FieldType("Bool", "BIT", EFieldName.Booleano, ECategory.Aleatorio, EBCategory.Random, EBFieldType.Bool, "True\n\rFalse") },
-            {EFieldName.Replace, new FieldType("Replace", "VARCHAR(80)", EFieldName.Replace, ECategory.Aleatorio, EBCategory.Random, EBFieldType.Replace, " \n\r \n\r ") },
-            {EFieldName.Guid, new FieldType("Guid", "VARCHAR(80)", EFieldName.Guid, ECategory.Aleatorio, EBCategory.Random, EBFieldType.Guid, " \n\r \n\r ") },
-            {EFieldName.Uuid, new FieldType("Uuid", "VARCHAR(80)", EFieldName.Uuid, ECategory.Aleatorio, EBCategory.Random, EBFieldType.Uuid, " \n\r \n\r ") },
-            {EFieldName.AlfaNumerico, new FieldType("AlfaNumerico", "VARCHAR(80)", EFieldName.AlfaNumerico, ECategory.Aleatorio, EBCategory.Random, EBFieldType.AlphaNumeric, " \n\r \n\r ") },
-            {EFieldName.Hexadecimal, new FieldType("Hexadecimal", "VARCHAR(80)", EFieldName.Hexadecimal, ECategory.Aleatorio, EBCategory.Random, EBFieldType.Hexadecimal, " \n\r \n\r ") },
             #endregion                                                                                                      
         };
     }

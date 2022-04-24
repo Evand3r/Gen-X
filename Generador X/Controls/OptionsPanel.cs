@@ -57,6 +57,7 @@ namespace Generador_X.Controls
                 //case EBFieldType.ExampleEmail:
                 //    break;
                 case EBFieldType.Number:
+                case EBFieldType.Amount:
                 case EBFieldType.Latitude:
                 case EBFieldType.Longitude:
                     return new OptionsNumberType(ftype.BCategoryName, ftype.BName);

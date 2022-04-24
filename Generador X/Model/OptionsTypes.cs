@@ -81,6 +81,10 @@ namespace Generador_X.Model
                 {
                     value = fkr.PickRandom(1, 0).ToString().OrDefault(fkr, Nulls, NullValue);
                 }
+                else if (EBFld == EBFieldType.Currency)
+                {
+                    value = fkr.Finance.Currency().Code.ToString().OrDefault(fkr, Nulls, NullValue);
+                }
                 else if (EBFld == EBFieldType.Bool)
                 {
                     value = fkr.Random.Bool().ToString().OrDefault(fkr, Nulls, NullValue);
